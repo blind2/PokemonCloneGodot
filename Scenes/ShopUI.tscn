@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scripts/Shop.gd" type="Script" id=2]
+[ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0901961, 0.117647, 0.192157, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.0901961, 0.117647, 0.192157, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 30
+font_data = ExtResource( 3 )
+
+[node name="ShopPanel" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PokeMart" type="Label" parent="."]
+margin_left = 440.662
+margin_top = 13.2284
+margin_right = 605.662
+margin_bottom = 45.2284
+custom_fonts/font = SubResource( 2 )
+text = "Poke Mart"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="."]
+margin_left = 990.091
+margin_top = 13.2284
+margin_right = 1011.09
+margin_bottom = 33.2284
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemsDescription" type="RichTextLabel" parent="."]
+margin_left = 67.0
+margin_top = 69.0
+margin_right = 512.0
+margin_bottom = 565.0
+custom_styles/normal = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 6 )
+tab_size = 24
+text = "description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price" type="Label" parent="ItemsDescription"]
+margin_left = 76.6244
+margin_top = 268.417
+margin_right = 144.624
+margin_bottom = 325.417
+custom_fonts/font = SubResource( 7 )
+text = "$
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ItemsDescription"]
+margin_left = 8.62444
+margin_top = 268.417
+margin_right = 76.6244
+margin_bottom = 325.417
+custom_fonts/font = SubResource( 7 )
+text = "Price : 
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerMoney" type="Label" parent="ItemsDescription"]
+margin_left = 8.62443
+margin_top = 325.417
+margin_right = 149.624
+margin_bottom = 382.417
+custom_fonts/font = SubResource( 7 )
+text = "Quantity :
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buy" type="Button" parent="ItemsDescription"]
+margin_left = 52.4525
+margin_top = 437.226
+margin_right = 392.452
+margin_bottom = 482.226
+custom_fonts/font = SubResource( 8 )
+text = "Buy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quantity" type="LineEdit" parent="ItemsDescription"]
+margin_left = 116.0
+margin_top = 325.0
+margin_right = 174.0
+margin_bottom = 361.0
+text = "1"
+max_length = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="ItemsDescription/Buy" to="." method="_on_Buy_pressed"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/NPC/pokemart_vendor.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/RegularNPC.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.93447, 10 )
+
+[node name="RegularNPC" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.100141, 0.0143805 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.31667, 0.104673 )
+scale = Vector2( 1.01431, 1 )
+texture = ExtResource( 1 )
