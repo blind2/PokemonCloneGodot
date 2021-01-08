@@ -13,9 +13,7 @@
 [ext_resource path="res://Assets/NPC/bug_battle_sprite.png" type="Texture" id=11]
 [ext_resource path="res://Assets/NPC/lady.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/PetwerCity.gd" type="Script" id=13]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/bug_catcher.png-868c4109df5467e6be02cb461ec4cc94.stex"
+[ext_resource path="res://Assets/NPC/bug_catcher.png" type="Texture" id=14]
 
 [node name="PewterCity" type="Node2D"]
 script = ExtResource( 13 )
@@ -66,13 +64,14 @@ position = Vector2( 279.58, 202.477 )
 position = Vector2( 322.379, 51.8476 )
 
 [node name="Lady" parent="." instance=ExtResource( 10 )]
-position = Vector2( 396.153, 782.486 )
+position = Vector2( 128.69, 762.933 )
 trainer_sprite = ExtResource( 12 )
+post_battle_dialog = [ "I make my pokemon stronger" ]
 
 [node name="BugCatcher" parent="." instance=ExtResource( 10 )]
 position = Vector2( 253.634, 724.374 )
 trainer_name = "Bug Catcher Josh"
-trainer_sprite = SubResource( 1 )
+trainer_sprite = ExtResource( 14 )
 battle_sprite = ExtResource( 11 )
 pre_battle_dialog = [ "Hey, wait up! What's the hurry?" ]
 post_battle_dialog = [ "Sometimes, you can find stuff on the ground!", "I'm looking for  the stuff I dropped!" ]

@@ -33,12 +33,11 @@ margin_right = 954.182
 margin_bottom = 143.211
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "test"
-text = "test"
 scroll_following = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Delay" type="Timer" parent="."]
+[connection signal="dialog_finished" from="." to="." method="_on_DialogBox_dialog_finished"]
 [connection signal="timeout" from="Delay" to="." method="_on_Delay_timeout"]

@@ -4,7 +4,6 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "blink"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Black:color")
 tracks/0/interp = 1

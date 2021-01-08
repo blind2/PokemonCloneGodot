@@ -4,6 +4,7 @@ var player
 var opponent
 var selection
 var battle_state = INTRO
+var first_pokemon
 
 onready var player_pokemon = get_node("PlayerPokemon")
 onready var opponent_pokemon = get_node("OpponentPokemon")
@@ -93,7 +94,7 @@ func battle_intro():
 	battle_animation.play("start_fight")
 	dialog_box._set_dialog_text(opponent.trainer_name+" would like to battle")
 	yield(dialog_box,"dialog_finished")
-	yield(dialog_box,"key_pressed")
+	yield(player,"next_key_pressed")
 	battle_animation.play("opponent_switch")
 	dialog_box._set_dialog_text(opponent.name+" send out "+opponent.get_pokemon().pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
@@ -114,8 +115,10 @@ func battle_intro():
 func change_turn():
 	moves_panel.hide()
 	if player.get_pokemon(0).speed > opponent.get_pokemon().speed:
+		first_pokemon = player.get_pokemon(0)
 		change_state(PLAYER_TURN)
 	elif opponent.get_pokemon().speed > player.get_pokemon(0).speed:
+		first_pokemon = opponent.get_pokemon()
 		change_state(OPPONENT_TURN)
 
 func player_turn():
@@ -129,8 +132,10 @@ func player_turn():
 	
 	if(opponent.get_pokemon().dead()):
 		change_state(OPPONENT_DEATH)
-	else:
+	elif first_pokemon == player.get_pokemon(0):
 		change_state(OPPONENT_TURN)
+	else:
+		change_state(SELECT_ACTION)
 
 func trainer_turn():
 	dialog_box._set_dialog_text(opponent.get_pokemon().pokemon_name+" used "+opponent.get_pokemon().get_move(0).move_name)
@@ -141,10 +146,13 @@ func trainer_turn():
 	_bar_animation(player_frame.get_node("HpBar"),player.get_pokemon(0).current_hp)
 	yield(tween,"tween_completed")
 	
+	
 	if player.get_pokemon(0).dead():
 		change_state(PLAYER_DEATH)
-	else:
+	elif first_pokemon == opponent.get_pokemon():
 		change_state(PLAYER_TURN)
+	else:
+		change_state(SELECT_ACTION)
 
 func player_pokemon_dead():
 	dialog_box._set_dialog_text(player.get_pokemon(0).pokemon_name+" as fainted !")
@@ -155,7 +163,7 @@ func opponent_pokemon_dead():
 	dialog_box._set_dialog_text(opponent.get_pokemon().pokemon_name+" as fainted !")
 	opponent_pokemon.visible = false
 	yield(dialog_box,"dialog_finished")
-	yield(dialog_box, "key_pressed")
+	#yield(dialog_box, "key_pressed")
 	get_player_pokemon_data(0) #update exp bar 
 	player.get_pokemon(0)._gain_experience(8000)
 	dialog_box._set_dialog_text(player.get_pokemon(0).pokemon_name+" gained "+str(player.get_pokemon(0).experience_total)+" experiences")
@@ -199,7 +207,7 @@ func opponent_defeated():
 	action_panel.hide()
 	dialog_box._set_dialog_text("Congrulation you have beat ! "+opponent.trainer_name)
 	yield(dialog_box,"dialog_finished")
-	yield(dialog_box,"key_pressed")
+	#yield(dialog_box,"key_pressed")
 	queue_free()
 
 func _bar_animation(bar, stat):
@@ -217,7 +225,6 @@ func _on_Move1_pressed():
 func _on_Move2_pressed():
 	selection =  1
 	change_state(CHANGE_TURN)
-	
 
 func _on_Move3_pressed():
 	pass 

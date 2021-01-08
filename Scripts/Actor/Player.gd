@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var speed = 0.5
 var state = WALK
+var current_direction = DIRECTION.DOWN
 var list_of_pokemon = []
 var current_pokemon
 
@@ -9,6 +10,8 @@ onready var sprite = get_node("Sprite")
 onready var tween = get_node("Tween")
 onready var ray_cast = get_node("RayCast2D")
 onready var animation_player = get_node("AnimationPlayer")
+
+signal next_key_pressed()
 
 const TILE_SIZE = 16
 
@@ -19,6 +22,12 @@ var inputs = {
 	"ui_right" : Vector2.RIGHT
 }
 
+enum DIRECTION {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+}
 enum {
 	WALK,
 	RUN,
@@ -49,6 +58,8 @@ func _unhandled_input(event):
 			state = WALK
 		elif event.pressed and event.scancode == KEY_A:
 			state = STOP
+			emit_signal("next_key_press")
+			print("next_key_event")
 
 func move(direction):
 	ray_cast.cast_to = inputs[direction] * TILE_SIZE
@@ -60,6 +71,8 @@ func move(direction):
 			speed,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			tween.start()
 	
+	
+	
 
 func get_input(animation):
 	if tween.is_active():
@@ -68,18 +81,22 @@ func get_input(animation):
 	if Input.is_action_pressed("ui_up"):
 		move("ui_up")
 		animation_player.play(animation+"_up")
+		current_direction = DIRECTION.UP
 		
 	elif Input.is_action_pressed("ui_down"):
 		move("ui_down")
 		animation_player.play(animation+"_down")
+		current_direction = DIRECTION.DOWN
 		
 	elif Input.is_action_pressed("ui_left"):
 		move("ui_left")
 		animation_player.play(animation+"_left")
+		current_direction = DIRECTION.LEFT
 		
 	elif Input.is_action_pressed("ui_right"):
 		move("ui_right")
 		animation_player.play(animation+"_right")
+		current_direction = DIRECTION.RIGHT
 
 func walk():
 	sprite.texture = (load("res://Assets/SpriteSheets/red_walking.png"))

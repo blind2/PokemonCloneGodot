@@ -15,7 +15,6 @@ position = Vector2( 404.537, 624.153 )
 [node name="GameUI" type="CanvasLayer" parent="."]
 
 [node name="DialogBox" parent="GameUI" instance=ExtResource( 3 )]
-visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 23.3016
