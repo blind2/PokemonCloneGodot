@@ -94,7 +94,7 @@ func battle_intro():
 	battle_animation.play("start_fight")
 	dialog_box._set_dialog_text(opponent.trainer_name+" would like to battle")
 	yield(dialog_box,"dialog_finished")
-	yield(player,"next_key_pressed")
+	#yield(player,"next_key_pressed")
 	battle_animation.play("opponent_switch")
 	dialog_box._set_dialog_text(opponent.name+" send out "+opponent.get_pokemon().pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
@@ -117,6 +117,7 @@ func change_turn():
 	if player.get_pokemon(0).speed > opponent.get_pokemon().speed:
 		first_pokemon = player.get_pokemon(0)
 		change_state(PLAYER_TURN)
+		
 	elif opponent.get_pokemon().speed > player.get_pokemon(0).speed:
 		first_pokemon = opponent.get_pokemon()
 		change_state(OPPONENT_TURN)
@@ -126,31 +127,34 @@ func player_turn():
 	yield(dialog_box,"dialog_finished")
 	battle_animation.play("opponent_damage_taken")
 	yield(battle_animation,"animation_finished")
-	player.get_pokemon(0).attack(selection,opponent.get_pokemon())
+	player.get_pokemon(0).attack(player.get_pokemon(0).get_move(selection),opponent.get_pokemon())
 	_bar_animation(opponent_frame.get_node("HpBar"), opponent.get_pokemon().current_hp)
 	yield(tween,"tween_completed")
 	
 	if(opponent.get_pokemon().dead()):
 		change_state(OPPONENT_DEATH)
+		
 	elif first_pokemon == player.get_pokemon(0):
 		change_state(OPPONENT_TURN)
+		
 	else:
 		change_state(SELECT_ACTION)
 
 func trainer_turn():
-	dialog_box._set_dialog_text(opponent.get_pokemon().pokemon_name+" used "+opponent.get_pokemon().get_move(0).move_name)
+	dialog_box._set_dialog_text(opponent.get_pokemon().pokemon_name+" used "+opponent.choose_move().move_name)
 	yield(dialog_box,"dialog_finished")
 	battle_animation.play("player_damage_taken")
 	yield(battle_animation,"animation_finished")
-	opponent.get_pokemon().attack(0,player.get_pokemon(0))
+	opponent.get_pokemon().attack(opponent.choose_move(),player.get_pokemon(0))
 	_bar_animation(player_frame.get_node("HpBar"),player.get_pokemon(0).current_hp)
 	yield(tween,"tween_completed")
 	
-	
 	if player.get_pokemon(0).dead():
 		change_state(PLAYER_DEATH)
+		
 	elif first_pokemon == opponent.get_pokemon():
 		change_state(PLAYER_TURN)
+		
 	else:
 		change_state(SELECT_ACTION)
 
@@ -178,6 +182,7 @@ func gain_experience():
 			_bar_animation(player_frame.get_node("ExpBar"),player.get_pokemon(0).experience_required)
 			yield(tween,"tween_completed")
 			player_frame.get_node("ExpBar").value = 0
+			
 		else:
 			_bar_animation(player_frame.get_node("ExpBar"),player.get_pokemon(0).experience)
 			yield(tween,"tween_completed")
@@ -188,6 +193,7 @@ func gain_experience():
 	
 	if opponent.check_party_empty():
 		change_state(OPPONENT_DEFEATED)
+		
 	else:
 		change_state(OPPONENT_SWITCH)
 

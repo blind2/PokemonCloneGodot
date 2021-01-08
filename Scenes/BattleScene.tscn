@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Background/gym_battle.png" type="Texture" id=2]
@@ -9,11 +9,12 @@
 [ext_resource path="res://Resources/battle_animation.tres" type="Animation" id=7]
 [ext_resource path="res://Scenes/DialogBox.tscn" type="PackedScene" id=9]
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "opponent_dead"
+[sub_resource type="Animation" id=3]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:visible")
@@ -28,7 +29,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:rect_position")
 tracks/0/interp = 1
@@ -42,7 +43,7 @@ tracks/0/keys = {
 "values": [ Vector2( 621, 48.108 ), Vector2( 1024, 48.108 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:rect_position")
 tracks/0/interp = 1
@@ -68,7 +69,7 @@ tracks/1/keys = {
 "values": [ 1, 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:visible")
@@ -83,7 +84,7 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:rect_position")
 tracks/0/interp = 1
@@ -97,7 +98,7 @@ tracks/0/keys = {
 "values": [ Vector2( 158, 219 ), Vector2( -200, 219 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:rect_position")
 tracks/0/interp = 1
@@ -123,7 +124,7 @@ tracks/1/keys = {
 "values": [ 1, 1, 6 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:rect_position")
 tracks/0/interp = 1
@@ -185,7 +186,7 @@ tracks/4/keys = {
 "values": [ 6, 6 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:rect_position")
 tracks/0/interp = 1
@@ -259,10 +260,10 @@ tracks/5/keys = {
 "values": [ 1, 1 ]
 }
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -275,7 +276,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0, 0, 0, 0.392157 )
 border_width_left = 2
 border_width_top = 2
@@ -288,11 +289,11 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=14]
 size = 30
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -305,7 +306,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -318,22 +319,9 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=17]
 size = 30
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
@@ -350,8 +338,21 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=19]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
+
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -364,7 +365,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=21]
+[sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -377,22 +378,9 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=22]
+[sub_resource type="DynamicFont" id=23]
 size = 30
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=23]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
@@ -426,7 +414,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
+border_color = Color( 1, 1, 1, 1 )
 border_blend = true
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -434,6 +422,19 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=28]
 bg_color = Color( 0.403922, 0.941176, 0.0352941, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -445,7 +446,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=29]
 bg_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -458,18 +459,18 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=29]
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=30]
-size = 30
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=31]
 size = 30
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="DynamicFont" id=32]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 0.403922, 0.941176, 0.0352941, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -482,10 +483,10 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=33]
+[sub_resource type="DynamicFont" id=34]
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=34]
+[sub_resource type="StyleBoxFlat" id=35]
 bg_color = Color( 0.0588235, 0.305882, 0.894118, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -498,7 +499,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id=35]
+[sub_resource type="StyleBoxFlat" id=36]
 bg_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -511,7 +512,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=36]
+[sub_resource type="DynamicFont" id=37]
 font_data = ExtResource( 1 )
 
 [node name="BattleScene" type="Panel"]
@@ -523,7 +524,8 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 300.0
-custom_styles/panel = SubResource( 1 )
+theme = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -577,14 +579,14 @@ dialog = [  ]
 
 [node name="BattleAnimation" type="AnimationPlayer" parent="."]
 anims/opponent_damage_taken = ExtResource( 7 )
-anims/opponent_dead = SubResource( 2 )
-anims/opponent_switch = SubResource( 3 )
-anims/opponent_switch_pokemon = SubResource( 4 )
-anims/player_damage_taken = SubResource( 5 )
-anims/player_switch = SubResource( 6 )
-anims/player_switch_pokemon = SubResource( 7 )
-anims/start_fight = SubResource( 8 )
-anims/start_fight_pokemon = SubResource( 9 )
+anims/opponent_dead = SubResource( 3 )
+anims/opponent_switch = SubResource( 4 )
+anims/opponent_switch_pokemon = SubResource( 5 )
+anims/player_damage_taken = SubResource( 6 )
+anims/player_switch = SubResource( 7 )
+anims/player_switch_pokemon = SubResource( 8 )
+anims/start_fight = SubResource( 9 )
+anims/start_fight_pokemon = SubResource( 10 )
 
 [node name="Moves" type="Panel" parent="."]
 visible = false
@@ -593,7 +595,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -190.0
 margin_bottom = 6.10352e-05
-custom_styles/panel = SubResource( 10 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -603,9 +605,9 @@ margin_left = 192.0
 margin_top = 14.0
 margin_right = 452.0
 margin_bottom = 79.0
-custom_styles/hover = SubResource( 11 )
-custom_styles/normal = SubResource( 12 )
-custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/normal = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Attaque 1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -616,9 +618,9 @@ margin_left = 568.0
 margin_top = 14.0
 margin_right = 828.0
 margin_bottom = 79.0
-custom_styles/hover = SubResource( 14 )
-custom_styles/normal = SubResource( 15 )
-custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 15 )
+custom_styles/normal = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 text = "Attaque 2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -629,9 +631,9 @@ margin_left = 192.0
 margin_top = 106.0
 margin_right = 452.0
 margin_bottom = 171.0
-custom_styles/hover = SubResource( 17 )
-custom_styles/normal = SubResource( 12 )
-custom_fonts/font = SubResource( 13 )
+custom_styles/hover = SubResource( 18 )
+custom_styles/normal = SubResource( 13 )
+custom_fonts/font = SubResource( 14 )
 text = "Attaque 3"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -642,9 +644,9 @@ margin_left = 568.0
 margin_top = 106.0
 margin_right = 828.0
 margin_bottom = 171.0
-custom_styles/hover = SubResource( 18 )
-custom_styles/normal = SubResource( 15 )
-custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 19 )
+custom_styles/normal = SubResource( 16 )
+custom_fonts/font = SubResource( 17 )
 text = "Attaque 4"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -655,7 +657,7 @@ visible = false
 margin_top = 410.0
 margin_right = 1024.0
 margin_bottom = 600.0
-custom_styles/panel = SubResource( 19 )
+custom_styles/panel = SubResource( 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -665,9 +667,9 @@ margin_left = 192.0
 margin_top = 14.0
 margin_right = 452.0
 margin_bottom = 78.0
-custom_styles/hover = SubResource( 20 )
-custom_styles/normal = SubResource( 21 )
-custom_fonts/font = SubResource( 22 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/normal = SubResource( 22 )
+custom_fonts/font = SubResource( 23 )
 text = "Fight"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -678,9 +680,9 @@ margin_left = 568.0
 margin_top = 14.0
 margin_right = 828.0
 margin_bottom = 78.0
-custom_styles/hover = SubResource( 23 )
-custom_styles/normal = SubResource( 21 )
-custom_fonts/font = SubResource( 22 )
+custom_styles/hover = SubResource( 24 )
+custom_styles/normal = SubResource( 22 )
+custom_fonts/font = SubResource( 23 )
 text = "Pokemon"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -691,9 +693,9 @@ margin_left = 192.0
 margin_top = 106.0
 margin_right = 452.0
 margin_bottom = 170.0
-custom_styles/hover = SubResource( 24 )
-custom_styles/normal = SubResource( 21 )
-custom_fonts/font = SubResource( 22 )
+custom_styles/hover = SubResource( 25 )
+custom_styles/normal = SubResource( 22 )
+custom_fonts/font = SubResource( 23 )
 text = "Bag"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -704,9 +706,9 @@ margin_left = 568.0
 margin_top = 106.0
 margin_right = 828.0
 margin_bottom = 170.0
-custom_styles/hover = SubResource( 25 )
-custom_styles/normal = SubResource( 21 )
-custom_fonts/font = SubResource( 22 )
+custom_styles/hover = SubResource( 26 )
+custom_styles/normal = SubResource( 22 )
+custom_fonts/font = SubResource( 23 )
 text = "Run"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -718,7 +720,7 @@ margin_left = 56.0
 margin_top = 32.0
 margin_right = 360.0
 margin_bottom = 112.0
-custom_styles/panel = SubResource( 26 )
+custom_styles/panel = SubResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -728,9 +730,9 @@ margin_left = 2.0
 margin_top = 32.0
 margin_right = 300.0
 margin_bottom = 56.0
-custom_styles/fg = SubResource( 27 )
-custom_styles/bg = SubResource( 28 )
-custom_fonts/font = SubResource( 29 )
+custom_styles/fg = SubResource( 28 )
+custom_styles/bg = SubResource( 29 )
+custom_fonts/font = SubResource( 30 )
 value = 100.0
 rounded = true
 __meta__ = {
@@ -741,7 +743,7 @@ __meta__ = {
 margin_left = 8.0
 margin_right = 72.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 31 )
 text = "Steelix"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -751,7 +753,7 @@ __meta__ = {
 margin_left = 245.033
 margin_right = 299.033
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 32 )
 text = "Lvl 60"
 align = 1
 valign = 1
@@ -765,7 +767,7 @@ margin_left = 672.0
 margin_top = 294.418
 margin_right = 976.0
 margin_bottom = 395.418
-custom_styles/panel = SubResource( 26 )
+custom_styles/panel = SubResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -775,9 +777,9 @@ margin_left = 3.0
 margin_top = 32.0
 margin_right = 300.0
 margin_bottom = 56.0
-custom_styles/fg = SubResource( 32 )
-custom_styles/bg = SubResource( 28 )
-custom_fonts/font = SubResource( 33 )
+custom_styles/fg = SubResource( 33 )
+custom_styles/bg = SubResource( 29 )
+custom_fonts/font = SubResource( 34 )
 value = 100.0
 rounded = true
 __meta__ = {
@@ -789,9 +791,9 @@ margin_left = 3.0
 margin_top = 64.0
 margin_right = 300.0
 margin_bottom = 88.0
-custom_styles/fg = SubResource( 34 )
-custom_styles/bg = SubResource( 35 )
-custom_fonts/font = SubResource( 36 )
+custom_styles/fg = SubResource( 35 )
+custom_styles/bg = SubResource( 36 )
+custom_fonts/font = SubResource( 37 )
 rounded = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -801,7 +803,7 @@ __meta__ = {
 margin_left = 8.0
 margin_right = 72.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 31 )
 text = "Charizard"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -811,7 +813,7 @@ __meta__ = {
 margin_left = 243.6
 margin_right = 297.6
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 32 )
 text = "Lvl 55"
 align = 1
 valign = 1

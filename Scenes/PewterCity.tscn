@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Resources/grass_tilesets.tres" type="TileSet" id=1]
 [ext_resource path="res://Resources/village_ground.tres" type="TileSet" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/NPC/lady.png" type="Texture" id=12]
 [ext_resource path="res://Scripts/PetwerCity.gd" type="Script" id=13]
 [ext_resource path="res://Assets/NPC/bug_catcher.png" type="Texture" id=14]
+[ext_resource path="res://Assets/NPC/lady_battle_sprite.png" type="Texture" id=15]
 
 [node name="PewterCity" type="Node2D"]
 script = ExtResource( 13 )
@@ -65,7 +66,10 @@ position = Vector2( 322.379, 51.8476 )
 
 [node name="Lady" parent="." instance=ExtResource( 10 )]
 position = Vector2( 128.69, 762.933 )
+trainer_name = "Lady Michelle"
 trainer_sprite = ExtResource( 12 )
+battle_sprite = ExtResource( 15 )
+pre_battle_dialog = [ "IAre You ready to fight ?" ]
 post_battle_dialog = [ "I make my pokemon stronger" ]
 
 [node name="BugCatcher" parent="." instance=ExtResource( 10 )]

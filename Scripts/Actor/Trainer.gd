@@ -1,5 +1,4 @@
 extends KinematicBody2D
-class_name Trainer
 
 var current_pokemon
 var next_pokemon = 0
@@ -9,27 +8,20 @@ var battle_scene = preload("res://Scenes/BattleScene.tscn")
 var comunicate = false
 onready var sprite = get_node("Sprite")
 
-#onready var player = get_node("/root/World/Player")
-#onready var dialog_box = get_node("/root/PetwerCityGym/GameUI/DialogBox")
-#onready var game_ui = get_node("/root/PetwerCityGym/GameUI")
-
 export (String) var trainer_name
 export (Texture) var trainer_sprite
 export (Texture) var battle_sprite
-
 export (Array, String) var pre_battle_dialog
 export (Array, String) var post_battle_dialog
 
 signal party_empty()
 
-
 func _ready():
 	#Aligne et centre le dresseur avec les tuiles de jeu
-	
 	sprite.texture = trainer_sprite
 	position = position.snapped(Vector2.ONE * 16) 
 	position += Vector2.ONE * 16/2 
-
+	
 
 func _add_pokemon(pokemon):
 	list_of_pokemon.append(pokemon)
@@ -52,7 +44,15 @@ func refacing(player):
 		
 	elif player_current_direction == player_direction.RIGHT:
 		set_trainer_frame(1)
+
+#choisi une attaque au hasard dans la liste d'attaque du pokemon
+func choose_move():
+	 var max_number = get_pokemon().list_of_moves.size() - 1
+	 var rng = RandomNumberGenerator.new()
+	 rng.randomize()
+	 var random_number = rng.randi_range(0, max_number)
 	
+	 return  get_pokemon().list_of_moves[random_number]
 
 func _start_fight(player, opponent):
 	current_pokemon = list_of_pokemon[0]

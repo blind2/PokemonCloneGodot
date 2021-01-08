@@ -60,10 +60,11 @@ func _lvl_up():
 func _get_required_experience(lvl):
 	return round (pow(lvl,1.8) + lvl * 4)
 
-func attack(index, pokemon):
+func attack(move, pokemon):
 	if pokemon.current_hp>0:
-		var damage =((level*2/5) * (list_of_moves[index].power*attack/pokemon.defense))/50
+		var damage =((level*2/5) * (move.power*attack/pokemon.defense))/50
 		pokemon.current_hp -= damage
+		print(move.move_name+" dealt "+str(damage)+" damage")
 
 func dead():
 	if current_hp <=0:

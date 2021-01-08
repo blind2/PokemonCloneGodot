@@ -28,18 +28,12 @@ _global_script_classes=[ {
 "class": "PokemonBaseStats",
 "language": "GDScript",
 "path": "res://Scripts/PokemonBaseStats.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Trainer",
-"language": "GDScript",
-"path": "res://Scripts/Actor/Trainer.gd"
 } ]
 _global_script_class_icons={
 "Move": "",
 "Party": "",
 "Pokemon": "",
-"PokemonBaseStats": "",
-"Trainer": ""
+"PokemonBaseStats": ""
 }
 
 [application]
