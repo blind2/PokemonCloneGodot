@@ -1,19 +1,18 @@
 extends KinematicBody2D
 
-var speed = 0.5
+var speed 
 var state = WALK
-var current_direction = DIRECTION.DOWN
-var list_of_pokemon = []
-var current_pokemon
+var party = Party.new()
+var player_input = PlayerInput.new()
 
 onready var sprite = get_node("Sprite")
 onready var tween = get_node("Tween")
 onready var ray_cast = get_node("RayCast2D")
 onready var animation_player = get_node("AnimationPlayer")
 
-signal next_key_pressed()
-
 const TILE_SIZE = 16
+const WALK_SPEED = 0.5
+const RUN_SPEED  = 0.2
 
 var inputs = {
 	"ui_up": Vector2.UP,
@@ -22,44 +21,30 @@ var inputs = {
 	"ui_right" : Vector2.RIGHT
 }
 
-enum DIRECTION {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-}
 enum {
 	WALK,
 	RUN,
-	STOP
 }
 
 func _ready():
 	sprite.frame = 4
 	position = position.snapped(Vector2.ONE * TILE_SIZE) 
 	position += Vector2.ONE * TILE_SIZE/2 
-	_player_pokemon_team()
+	pokemon_team()
 
 func _physics_process(delta):
+	player_input.update()
+	
+	if player_input.back() == true:
+		state = RUN
+	elif player_input.back() == false:
+		state = WALK
+
 	match state:
 		WALK:
 			walk()
 		RUN:
 			run()
-		STOP:
-			speed = 0
-	
-
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_SPACE:
-			state = RUN
-		elif !event.pressed and event.scancode == KEY_SPACE:
-			state = WALK
-		elif event.pressed and event.scancode == KEY_A:
-			state = STOP
-			emit_signal("next_key_press")
-			print("next_key_event")
 
 func move(direction):
 	ray_cast.cast_to = inputs[direction] * TILE_SIZE
@@ -70,55 +55,48 @@ func move(direction):
 			tween.interpolate_property(self,"position", position, position + inputs[direction] * TILE_SIZE,
 			speed,Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 			tween.start()
-	
-	
-	
 
-func get_input(animation):
+func get_direction(animation):
 	if tween.is_active():
 		return
 		
-	if Input.is_action_pressed("ui_up"):
+	if player_input.input == player_input.UP:
 		move("ui_up")
 		animation_player.play(animation+"_up")
-		current_direction = DIRECTION.UP
 		
-	elif Input.is_action_pressed("ui_down"):
+	elif player_input.input == player_input.DOWN:
 		move("ui_down")
 		animation_player.play(animation+"_down")
-		current_direction = DIRECTION.DOWN
 		
-	elif Input.is_action_pressed("ui_left"):
+	elif player_input.input == player_input.LEFT:
 		move("ui_left")
 		animation_player.play(animation+"_left")
-		current_direction = DIRECTION.LEFT
 		
-	elif Input.is_action_pressed("ui_right"):
+	elif player_input.input == player_input.RIGHT:
 		move("ui_right")
 		animation_player.play(animation+"_right")
-		current_direction = DIRECTION.RIGHT
 
 func walk():
 	sprite.texture = (load("res://Assets/SpriteSheets/red_walking.png"))
-	speed = 0.5
-	get_input("walk")
+	speed = WALK_SPEED
+	get_direction("walk")
 
 func run():
 	sprite.texture = (load("res://Assets/SpriteSheets/red_running.png"))
-	speed= 0.2
-	get_input("run")
+	speed = RUN_SPEED
+	get_direction("run")
 
-func _add_pokemon(pokemon):
-	list_of_pokemon.append(pokemon)
 
-func get_pokemon(pokemon_index):
-	return list_of_pokemon[pokemon_index]
-
-#create a pokemon team for the player
-func _player_pokemon_team():
-	var charizard = Pokemon.new("Charizard",50,78,84,78,109,85,100)
-	var flamethrower = Move.new("Flamethrower",75,100,"Fire","Special",10)
-	var dragon_claw = Move.new("Dragon Claw",60,100,"Dragon","Physical",5)
+func pokemon_team():
+	var charizard = Pokemon.new("Charizard", 50, 78, 84, 78, 109, 85, 100)
+	var flamethrower = Move.new("Flamethrower", 75, 100, "Fire", "Special", 10)
+	var dragon_claw = Move.new("Dragon Claw", 60, 100, "Dragon", "Physical", 5)
 	charizard.add_move(flamethrower)
 	charizard.add_move(dragon_claw)
-	_add_pokemon(charizard)
+	
+	var venusaur = Pokemon.new("Venusaur", 50, 80, 82, 83, 100, 100, 80 )
+	var razor_leaf = Move.new("Razor Leaf", 55, 95, "Grass", "Physical", 25)
+	venusaur.add_move(razor_leaf)
+	
+	party.add_pokemon(charizard)
+	party.add_pokemon(venusaur)

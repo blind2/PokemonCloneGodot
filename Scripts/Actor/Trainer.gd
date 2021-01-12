@@ -1,18 +1,21 @@
 extends KinematicBody2D
 
-var current_pokemon
-var next_pokemon = 0
-var list_of_pokemon = []
+var party = Party.new()
 var defeated = false
 var battle_scene = preload("res://Scenes/BattleScene.tscn")
-var comunicate = false
+
 onready var sprite = get_node("Sprite")
+onready var change_direction = get_node("ChangeDirectionDelay")
+onready var player = get_node("/root/World/Forest/YSort/Player")
+
+onready var dialog_zone = get_node("DialogZone")
 
 export (String) var trainer_name
 export (Texture) var trainer_sprite
 export (Texture) var battle_sprite
-export (Array, String) var pre_battle_dialog
-export (Array, String) var post_battle_dialog
+
+var pre_battle_dialog = []
+var post_battle_dialog = []
 
 signal party_empty()
 
@@ -22,16 +25,21 @@ func _ready():
 	position = position.snapped(Vector2.ONE * 16) 
 	position += Vector2.ONE * 16/2 
 	
+	change_direction.wait_time = 0.8
+	change_direction.start()
+	
+	dialog_zone.create(self)
 
-func _add_pokemon(pokemon):
-	list_of_pokemon.append(pokemon)
 
-func set_dialog(dialog):
-	Global.dialog_box.dialog = dialog
+func get_post_battle_dialog():
+	Global.dialog_box.dialog = post_battle_dialog
 
-func refacing(player):
-	var player_current_direction = player.current_direction
-	var player_direction = player.DIRECTION
+func get_pre_battle_dialog():
+	Global.dialog_box.dialog = pre_battle_dialog
+
+func refacing():
+	var player_current_direction = player.player_input.input
+	var player_direction = player.player_input
 	
 	if player_current_direction == player_direction.UP:
 		set_trainer_frame(0)
@@ -47,54 +55,27 @@ func refacing(player):
 
 #choisi une attaque au hasard dans la liste d'attaque du pokemon
 func choose_move():
-	 var max_number = get_pokemon().list_of_moves.size() - 1
+	 var max_number = party.get_pokemon().list_of_moves.size() - 1
 	 var rng = RandomNumberGenerator.new()
 	 rng.randomize()
 	 var random_number = rng.randi_range(0, max_number)
 	
-	 return  get_pokemon().list_of_moves[random_number]
+	 return  party.get_pokemon().list_of_moves[random_number]
 
-func _start_fight(player, opponent):
-	current_pokemon = list_of_pokemon[0]
+func start_fight():
+	#current_pokemon = list_of_pokemon[0]
 	var new_battle_scene = battle_scene.instance()
-	new_battle_scene.create_battle_scene(player, opponent)
+	new_battle_scene.create_battle_scene(player,self)
 	Global.game_ui.add_child(new_battle_scene)
 
-func check_party_empty():
-	next_pokemon+=1
-	if next_pokemon<list_of_pokemon.size():
-		current_pokemon = list_of_pokemon[next_pokemon]
-	else:
-		defeated = true
-		return true
 
 func set_trainer_frame(frame):
 	sprite.frame = frame
 
-func get_pokemon():
-	return current_pokemon
 
+func _on_ChangeDirectionDelay_timeout():
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var frame = rng.randi_range(0,3)
+	set_trainer_frame(frame)
 
-func _on_DialogRange_body_entered(body):
-	if "Player" in body.name:
-		Global.dialog_box.dialog_encounter = true
-		#body.state = body.STOP
-		refacing(body)
-		print("dialog activé")
-	
-		if !defeated:
-			set_dialog(pre_battle_dialog)
-			
-			SceneChanger.transition_effect()
-			yield(SceneChanger,"transition_finished")
-			_start_fight(body,self)
-			pass
-		if defeated:
-			set_dialog(post_battle_dialog)
-
-
-func _on_DialogRange_body_exited(body):
-	if "Player" in body.name:
-		print("dialog non-activé")
-		Global.dialog_box.dialog_encounter = false
-		#Global.dialog_box.hide()

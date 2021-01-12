@@ -2,24 +2,23 @@
 
 [ext_resource path="res://Scripts/DialogBox.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/dialog_box.png" type="Texture" id=3]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0.470588 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
-border_blend = true
-
-[sub_resource type="DynamicFont" id=2]
-size = 40
+[sub_resource type="DynamicFont" id=1]
+size = 15
 font_data = ExtResource( 2 )
 
-[node name="DialogBox" type="Panel"]
+[node name="DialogBox" type="NinePatchRect"]
 anchor_right = 1.0
-margin_bottom = 186.0
-custom_styles/panel = SubResource( 1 )
+margin_right = -684.0
+margin_bottom = 62.0
+grow_vertical = 2
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+patch_margin_left = 17
+patch_margin_top = 5
+patch_margin_right = 17
+patch_margin_bottom = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -27,12 +26,18 @@ __meta__ = {
 dialog = [ "Welcome,", "How may I serve you ?" ]
 
 [node name="Text" type="RichTextLabel" parent="."]
-margin_left = 38.1811
-margin_top = 30.2114
-margin_right = 954.182
-margin_bottom = 143.211
-custom_fonts/normal_font = SubResource( 2 )
+margin_left = 26.0
+margin_top = 9.0
+margin_right = 311.0
+margin_bottom = 40.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.0980392, 0.231373, 0.631373, 0.835294 )
 bbcode_enabled = true
+bbcode_text = "test
+"
+text = "test
+"
+scroll_active = false
 scroll_following = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,4 +45,5 @@ __meta__ = {
 
 [node name="Delay" type="Timer" parent="."]
 [connection signal="dialog_finished" from="." to="." method="_on_DialogBox_dialog_finished"]
+[connection signal="next_line" from="." to="." method="_on_DialogBox_next_line"]
 [connection signal="timeout" from="Delay" to="." method="_on_Delay_timeout"]

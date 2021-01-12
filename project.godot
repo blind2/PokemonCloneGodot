@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/Party.gd"
 }, {
+"base": "Node",
+"class": "PlayerInput",
+"language": "GDScript",
+"path": "res://Scripts/Actor/PlayerInput.gd"
+}, {
 "base": "PokemonBaseStats",
 "class": "Pokemon",
 "language": "GDScript",
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Move": "",
 "Party": "",
+"PlayerInput": "",
 "Pokemon": "",
 "PokemonBaseStats": ""
 }
@@ -56,6 +62,11 @@ window/size/resizable=false
 ui_a={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+ui_s={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
  ]
 }
 

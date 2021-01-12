@@ -12,7 +12,7 @@
 [sub_resource type="Theme" id=1]
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="Animation" id=3]
 length = 0.5
@@ -571,8 +571,8 @@ __meta__ = {
 }
 
 [node name="DialogBox" parent="." instance=ExtResource( 9 )]
-margin_top = 411.0
-margin_bottom = 600.0
+margin_top = 408.0
+margin_bottom = 472.0
 dialog = [  ]
 
 [node name="Tween" type="Tween" parent="."]
@@ -817,6 +817,9 @@ custom_fonts/font = SubResource( 32 )
 text = "Lvl 55"
 align = 1
 valign = 1
+
+[node name="BattleSong" type="AudioStreamPlayer2D" parent="."]
+autoplay = true
 [connection signal="state_changed" from="." to="." method="on_BattleScene_state_changed"]
 [connection signal="mouse_entered" from="Moves/Move1" to="." method="_on_Move1_mouse_entered"]
 [connection signal="pressed" from="Moves/Move1" to="." method="_on_Move1_pressed"]

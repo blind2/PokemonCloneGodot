@@ -1,16 +1,15 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Actor/Trainer.gd" type="Script" id=1]
-[ext_resource path="res://Assets/NPC/brock.png" type="Texture" id=2]
+[ext_resource path="res://Assets/NPC/bug_catcher.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/DialogZone.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.53966, 10.7383 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 7.31618, 10.6966 )
+extents = Vector2( 7, 10 )
 
 [node name="Trainer" type="KinematicBody2D"]
 script = ExtResource( 1 )
+trainer_sprite = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -1.89078 )
@@ -21,10 +20,7 @@ hframes = 4
 position = Vector2( 0.0459669, -1.28358 )
 shape = SubResource( 1 )
 
-[node name="DialogRange" type="Area2D" parent="."]
+[node name="ChangeDirectionDelay" type="Timer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogRange"]
-position = Vector2( 0.0490799, -1.54562 )
-shape = SubResource( 2 )
-[connection signal="body_entered" from="DialogRange" to="." method="_on_DialogRange_body_entered"]
-[connection signal="body_exited" from="DialogRange" to="." method="_on_DialogRange_body_exited"]
+[node name="DialogZone" parent="." instance=ExtResource( 3 )]
+[connection signal="timeout" from="ChangeDirectionDelay" to="." method="_on_ChangeDirectionDelay_timeout"]

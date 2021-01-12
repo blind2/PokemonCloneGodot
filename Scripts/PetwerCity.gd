@@ -17,6 +17,17 @@ func set_lady_team():
 	feraligatr.add_move(ice_punch)
 	lady._add_pokemon(feraligatr)
 	
+	lady.pre_battle_dialog =[
+		"I wonder if you are good enough for me?",
+		"test",
+		"test"
+	]
+	
+	lady.post_battle_dialog = [
+		"I never wanted to lose to anybody,",
+		"especially to a younger kid…"
+	]
+	
 
 func set_bug_catcher_team():
 	var beedril = Pokemon.new("Beedrill", 45 ,65, 90, 40, 45, 80, 75)

@@ -39,7 +39,7 @@ func get_stat(base_stat, stat):
 func add_move(new_move):
 	list_of_moves.append(new_move)
 
-func _gain_experience(amount):
+func gain_experience(amount):
 	experience_total += amount
 	experience += amount
 	

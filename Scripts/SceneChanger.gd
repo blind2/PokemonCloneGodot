@@ -15,8 +15,8 @@ func change_scene(path):
 
 func transition_effect():
 	yield(get_tree().create_timer(0.5),"timeout")
-	animation_player.play("fade")
+	animation_player.play("start_battle")
 	yield(animation_player, "animation_finished")
 	yield(get_tree().create_timer(0.5),"timeout")
-	animation_player.play_backwards("fade")
+#	animation_player.play_backwards("fade")
 	emit_signal("transition_finished")

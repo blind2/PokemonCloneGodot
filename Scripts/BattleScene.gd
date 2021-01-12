@@ -6,8 +6,11 @@ var selection
 var battle_state = INTRO
 var first_pokemon
 
-onready var player_pokemon = get_node("PlayerPokemon")
-onready var opponent_pokemon = get_node("OpponentPokemon")
+var player_pokemon 
+var opponent_pokemon 
+
+onready var player_texture = get_node("PlayerPokemon")
+onready var opponent_texture = get_node("OpponentPokemon")
 onready var player_frame = get_node("PlayerFrame")
 onready var opponent_frame = get_node("OpponentFrame")
 onready var dialog_box = get_node("DialogBox")
@@ -38,6 +41,7 @@ func create_battle_scene(player, opponent):
 	self.opponent = opponent
 
 func _ready():
+	dialog_box.dialog_encounter = true
 	update_battle()
 
 func change_state(state):
@@ -69,129 +73,139 @@ func update_battle():
 			gain_experience()
 
 
-func get_player_pokemon_data(index):
-	player_pokemon.texture = (load("res://Assets/Pokemon/"+player.get_pokemon(index).pokemon_name+".png"))
-	player_frame.get_node("HpBar").max_value = player.get_pokemon(index).hp
-	player_frame.get_node("HpBar").value = player.get_pokemon(index).current_hp
-	player_frame.get_node("ExpBar").max_value = player.get_pokemon(index).experience_required
-	player_frame.get_node("ExpBar").value = player.get_pokemon(index).experience
-	player_frame.get_node("Lvl").text = "lvl "+str(player.get_pokemon(0).level)
-	player_frame.get_node("Name").text = player.get_pokemon(index).pokemon_name
-	moves_panel.get_node("Move1").text = player.get_pokemon(index).get_move(0).move_name
-	moves_panel.get_node("Move2").text = player.get_pokemon(index).get_move(1).move_name
+func get_player_pokemon_data():
+	player_pokemon = player.party.get_pokemon()
+	
+	player_texture.texture = (load("res://Assets/Pokemon/"+player_pokemon.pokemon_name+".png"))
+	player_frame.get_node("HpBar").max_value = player_pokemon.hp
+	player_frame.get_node("HpBar").value = player_pokemon.current_hp
+	player_frame.get_node("ExpBar").max_value = player_pokemon.experience_required
+	player_frame.get_node("ExpBar").value = player_pokemon.experience
+	player_frame.get_node("Lvl").text = "lvl "+str(player_pokemon.level)
+	player_frame.get_node("Name").text = player_pokemon.pokemon_name
+	moves_panel.get_node("Move1").text = player_pokemon.get_move(0).move_name
+	moves_panel.get_node("Move2").text = player_pokemon.get_move(1).move_name
 
 func get_opponent_pokemon_data():
-	opponent_pokemon.texture = (load("res://Assets/Pokemon/"+opponent.get_pokemon().pokemon_name+".png"))
-	opponent_frame.get_node("HpBar").max_value = opponent.get_pokemon().hp
-	opponent_frame.get_node("HpBar").value = opponent.get_pokemon().current_hp
-	opponent_frame.get_node("Lvl").text = "lvl "+str(opponent.get_pokemon().level)
-	opponent_frame.get_node("Name").text = opponent.get_pokemon().pokemon_name
+	opponent_pokemon = opponent.party.get_pokemon()
+	
+	opponent_texture.texture = (load("res://Assets/Pokemon/"+opponent_pokemon.pokemon_name+".png"))
+	opponent_frame.get_node("HpBar").max_value = opponent_pokemon.hp
+	opponent_frame.get_node("HpBar").value = opponent_pokemon.current_hp
+	opponent_frame.get_node("Lvl").text = "lvl "+str(opponent_pokemon.level)
+	opponent_frame.get_node("Name").text = opponent_pokemon.pokemon_name
 
 func battle_intro():
-	get_player_pokemon_data(0)
+	get_player_pokemon_data()
 	get_opponent_pokemon_data()
-	opponent_pokemon.texture = opponent.battle_sprite
+	opponent_texture.texture = opponent.battle_sprite
 	battle_animation.play("start_fight")
-	dialog_box._set_dialog_text(opponent.trainer_name+" would like to battle")
+	dialog_box._set_dialog_text(opponent.trainer_name+" would like to battle", true)
 	yield(dialog_box,"dialog_finished")
 	#yield(player,"next_key_pressed")
 	battle_animation.play("opponent_switch")
-	dialog_box._set_dialog_text(opponent.name+" send out "+opponent.get_pokemon().pokemon_name+" !")
+	dialog_box._set_dialog_text(opponent.name+" send out "+opponent_pokemon.pokemon_name+" !", false)
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("opponent_switch_pokemon")
-	opponent_pokemon.texture = (load("res://Assets/Pokemon/"+opponent.get_pokemon().pokemon_name+".png"))
+	opponent_texture.texture = (load("res://Assets/Pokemon/"+opponent_pokemon.pokemon_name+".png"))
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("player_switch")
-	dialog_box._set_dialog_text("Go "+player.get_pokemon(0).pokemon_name+" !")
+	dialog_box._set_dialog_text("Go "+player_pokemon.pokemon_name+" !", false)
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("player_switch_pokemon")
-	player_pokemon.texture = (load("res://Assets/Pokemon/"+player.get_pokemon(0).pokemon_name+".png"))
+	player_texture.texture = (load("res://Assets/Pokemon/"+player_pokemon.pokemon_name+".png"))
 	yield(battle_animation,"animation_finished")
 	player_frame.show()
 	opponent_frame.show()
 	
 	change_state(SELECT_ACTION)
 
+"""
+Determine quelle pokemon qui a la plus grande vitesse pour qu'il attaque en premier.
+Si les deux pokemon on la meme vitesse on lancera un dée pour déterminer se pokemon.
+"""
 func change_turn():
 	moves_panel.hide()
-	if player.get_pokemon(0).speed > opponent.get_pokemon().speed:
-		first_pokemon = player.get_pokemon(0)
+	if player_pokemon.speed > opponent_pokemon.speed:
+		first_pokemon = player_pokemon
 		change_state(PLAYER_TURN)
 		
-	elif opponent.get_pokemon().speed > player.get_pokemon(0).speed:
+	elif opponent_pokemon.speed > player_pokemon.speed:
 		first_pokemon = opponent.get_pokemon()
 		change_state(OPPONENT_TURN)
+	else:
+		pass # à completer
 
 func player_turn():
-	dialog_box._set_dialog_text(player.get_pokemon(0).pokemon_name+" used "+player.get_pokemon(0).get_move(selection).move_name)
+	dialog_box._set_dialog_text(player_pokemon.pokemon_name+" used "+ player_pokemon.get_move(selection).move_name, false)
 	yield(dialog_box,"dialog_finished")
 	battle_animation.play("opponent_damage_taken")
 	yield(battle_animation,"animation_finished")
-	player.get_pokemon(0).attack(player.get_pokemon(0).get_move(selection),opponent.get_pokemon())
-	_bar_animation(opponent_frame.get_node("HpBar"), opponent.get_pokemon().current_hp)
+	player_pokemon.attack(player_pokemon.get_move(selection),opponent_pokemon)
+	_bar_animation(opponent_frame.get_node("HpBar"), opponent_pokemon.current_hp)
 	yield(tween,"tween_completed")
 	
-	if(opponent.get_pokemon().dead()):
+	if(opponent_pokemon.dead()):
 		change_state(OPPONENT_DEATH)
 		
-	elif first_pokemon == player.get_pokemon(0):
+	elif first_pokemon == player_pokemon:
 		change_state(OPPONENT_TURN)
 		
 	else:
 		change_state(SELECT_ACTION)
 
 func trainer_turn():
-	dialog_box._set_dialog_text(opponent.get_pokemon().pokemon_name+" used "+opponent.choose_move().move_name)
+	dialog_box._set_dialog_text(opponent_pokemon.pokemon_name+" used "+opponent.choose_move().move_name, false)
 	yield(dialog_box,"dialog_finished")
 	battle_animation.play("player_damage_taken")
 	yield(battle_animation,"animation_finished")
-	opponent.get_pokemon().attack(opponent.choose_move(),player.get_pokemon(0))
-	_bar_animation(player_frame.get_node("HpBar"),player.get_pokemon(0).current_hp)
+	opponent_pokemon.attack(opponent.choose_move(),player_pokemon)
+	_bar_animation(player_frame.get_node("HpBar"),player_pokemon.current_hp)
 	yield(tween,"tween_completed")
 	
-	if player.get_pokemon(0).dead():
+	if player_pokemon.dead():
 		change_state(PLAYER_DEATH)
 		
-	elif first_pokemon == opponent.get_pokemon():
+	elif first_pokemon == opponent_pokemon:
 		change_state(PLAYER_TURN)
 		
 	else:
 		change_state(SELECT_ACTION)
 
 func player_pokemon_dead():
-	dialog_box._set_dialog_text(player.get_pokemon(0).pokemon_name+" as fainted !")
+	dialog_box._set_dialog_text(player_pokemon.pokemon_name+" as fainted !", true)
 	action_panel.hide()
 
 func opponent_pokemon_dead():
 	action_panel.hide()
-	dialog_box._set_dialog_text(opponent.get_pokemon().pokemon_name+" as fainted !")
-	opponent_pokemon.visible = false
+	dialog_box._set_dialog_text(opponent_pokemon.pokemon_name+" as fainted !", true)
+	opponent_texture.visible = false
 	yield(dialog_box,"dialog_finished")
 	#yield(dialog_box, "key_pressed")
-	get_player_pokemon_data(0) #update exp bar 
-	player.get_pokemon(0)._gain_experience(8000)
-	dialog_box._set_dialog_text(player.get_pokemon(0).pokemon_name+" gained "+str(player.get_pokemon(0).experience_total)+" experiences")
+	get_player_pokemon_data() #update exp bar 
+	player_pokemon.gain_experience(8000)
+	dialog_box._set_dialog_text(player_pokemon.pokemon_name+" gained "+str(player_pokemon.experience_total)+" experiences", true)
 
 	opponent_frame.hide()
 	
 	change_state(GAIN_EXPERIENCE)
 
 func gain_experience():
-	for i in range(player.get_pokemon(0).level_completed):
-		if i < player.get_pokemon(0).level_completed - 1:
-			_bar_animation(player_frame.get_node("ExpBar"),player.get_pokemon(0).experience_required)
+	for i in range(player_pokemon.level_completed):
+		if i < player_pokemon.level_completed - 1:
+			_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience_required)
 			yield(tween,"tween_completed")
 			player_frame.get_node("ExpBar").value = 0
 			
 		else:
-			_bar_animation(player_frame.get_node("ExpBar"),player.get_pokemon(0).experience)
+			_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience)
 			yield(tween,"tween_completed")
 	
-	player_frame.get_node("Lvl").text = "lvl "+str(player.get_pokemon(0).level)
+	player_frame.get_node("Lvl").text = "lvl "+str(player_pokemon.level)
 	yield(dialog_box,"dialog_finished")
-	player.get_pokemon(0).reset_experience_total()
+	player_pokemon.reset_experience_total()
 	
-	if opponent.check_party_empty():
+	if opponent.party.check_party_empty():
 		change_state(OPPONENT_DEFEATED)
 		
 	else:
@@ -199,11 +213,11 @@ func gain_experience():
 
 func opponent_switch_pokemon():
 	get_opponent_pokemon_data()
-	dialog_box._set_dialog_text(opponent.trainer_name+" send out "+opponent.get_pokemon().pokemon_name)
+	dialog_box._set_dialog_text(opponent.trainer_name+" send out "+opponent_pokemon.pokemon_name)
 	yield(dialog_box,"dialog_finished")
 	battle_animation.play_backwards("opponent_switch_pokemon")
 	yield(battle_animation,"animation_finished")
-	opponent_pokemon.visible = true
+	opponent_texture.visible = true
 	battle_animation.play("opponent_switch_pokemon")
 	yield(battle_animation,"animation_finished")
 	opponent_frame.show()
