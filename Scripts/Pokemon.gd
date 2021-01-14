@@ -64,7 +64,6 @@ func attack(move, pokemon):
 	if pokemon.current_hp>0:
 		var damage =((level*2/5) * (move.power*attack/pokemon.defense))/50
 		pokemon.current_hp -= damage
-		print(move.move_name+" dealt "+str(damage)+" damage")
 
 func dead():
 	if current_hp <=0:
@@ -73,5 +72,5 @@ func dead():
 		return false
 
 func get_move(move_index):
-	return list_of_moves[move_index]
-
+	if move_index < list_of_moves.size():
+		return list_of_moves[move_index]

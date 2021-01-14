@@ -11,7 +11,6 @@ var pp
 var max_pp
 var damage
 
-
 func _init(move_name, power, accuracy, type, category, pp):
 	self.move_name = move_name
 	self.power = power

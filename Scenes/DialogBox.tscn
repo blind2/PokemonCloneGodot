@@ -23,22 +23,20 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-dialog = [ "Welcome,", "How may I serve you ?" ]
 
 [node name="Text" type="RichTextLabel" parent="."]
-margin_left = 26.0
-margin_top = 9.0
-margin_right = 311.0
-margin_bottom = 40.0
+margin_left = 24.0
+margin_top = 12.0
+margin_right = 246.0
+margin_bottom = 43.0
 custom_fonts/normal_font = SubResource( 1 )
-custom_colors/default_color = Color( 0.0980392, 0.231373, 0.631373, 0.835294 )
+custom_colors/default_color = Color( 0.0980392, 0.231373, 0.631373, 0.72549 )
 bbcode_enabled = true
 bbcode_text = "test
 "
 text = "test
 "
 scroll_active = false
-scroll_following = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

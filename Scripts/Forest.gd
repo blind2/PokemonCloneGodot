@@ -1,13 +1,15 @@
 extends Node2D
 
-
+onready var player = get_node("YSort/Player")
 onready var lady = get_node("YSort/Lady")
 onready var bug_catcher = get_node("YSort/Josh")
 
+onready var dialog_box = $DialogBox
+
 func _ready():
+	player.position = Global.player_spawn_position
+	Global.align_object_with_grid(player)
 	#get every node inside this
-	lady.set_trainer_frame(2)
-	bug_catcher.set_trainer_frame(0)
 	set_bug_catcher_team()
 	set_lady_team()
 
@@ -21,13 +23,10 @@ func set_lady_team():
 	
 	lady.pre_battle_dialog =[
 		"I wonder if you are good enough for me?",
-		"This is a test string",
-		"This is a test string"
 	]
 	
 	lady.post_battle_dialog = [
-		"I never wanted to lose to anybody,",
-		"especially to a younger kid…"
+		"I never wanted to lose to anybody, especially to a younger kid…"
 	]
 	
 
@@ -38,7 +37,12 @@ func set_bug_catcher_team():
 	bug_catcher.party.add_pokemon(beedril)
 	
 	bug_catcher.pre_battle_dialog = [
-		"This is a test string",
-		"This is a test string"
+		"Hey ! You are not wearing shorts !",
+		"What's wrong with you ?"
 	]
+	
+	bug_catcher.post_battle_dialog = [
+		"One day i want to be good like you"
+	]
+	
 

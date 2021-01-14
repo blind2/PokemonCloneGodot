@@ -13,7 +13,7 @@ onready var player_texture = get_node("PlayerPokemon")
 onready var opponent_texture = get_node("OpponentPokemon")
 onready var player_frame = get_node("PlayerFrame")
 onready var opponent_frame = get_node("OpponentFrame")
-onready var dialog_box = get_node("DialogBox")
+onready var dialog_box = get_node("CombatDialogBox")
 onready var moves_panel = get_node("Moves")
 onready var action_panel = get_node("Action")
 onready var tween = get_node("Tween")
@@ -41,7 +41,6 @@ func create_battle_scene(player, opponent):
 	self.opponent = opponent
 
 func _ready():
-	dialog_box.dialog_encounter = true
 	update_battle()
 
 func change_state(state):
@@ -85,6 +84,8 @@ func get_player_pokemon_data():
 	player_frame.get_node("Name").text = player_pokemon.pokemon_name
 	moves_panel.get_node("Move1").text = player_pokemon.get_move(0).move_name
 	moves_panel.get_node("Move2").text = player_pokemon.get_move(1).move_name
+	moves_panel.get_node("Move3").text = player_pokemon.get_move(2).move_name
+	moves_panel.get_node("Move4").text = player_pokemon.get_move(3).move_name
 
 func get_opponent_pokemon_data():
 	opponent_pokemon = opponent.party.get_pokemon()
@@ -100,17 +101,16 @@ func battle_intro():
 	get_opponent_pokemon_data()
 	opponent_texture.texture = opponent.battle_sprite
 	battle_animation.play("start_fight")
-	dialog_box._set_dialog_text(opponent.trainer_name+" would like to battle", true)
-	yield(dialog_box,"dialog_finished")
-	#yield(player,"next_key_pressed")
+	dialog_box.set_combat_text(opponent.trainer_name+" would like to battle")
+	yield(dialog_box,"text_finished")
 	battle_animation.play("opponent_switch")
-	dialog_box._set_dialog_text(opponent.name+" send out "+opponent_pokemon.pokemon_name+" !", false)
+	dialog_box.set_combat_text(opponent.name+" send out "+opponent_pokemon.pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("opponent_switch_pokemon")
 	opponent_texture.texture = (load("res://Assets/Pokemon/"+opponent_pokemon.pokemon_name+".png"))
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("player_switch")
-	dialog_box._set_dialog_text("Go "+player_pokemon.pokemon_name+" !", false)
+	dialog_box.set_combat_text("Go "+player_pokemon.pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("player_switch_pokemon")
 	player_texture.texture = (load("res://Assets/Pokemon/"+player_pokemon.pokemon_name+".png"))
@@ -137,8 +137,8 @@ func change_turn():
 		pass # à completer
 
 func player_turn():
-	dialog_box._set_dialog_text(player_pokemon.pokemon_name+" used "+ player_pokemon.get_move(selection).move_name, false)
-	yield(dialog_box,"dialog_finished")
+	dialog_box.set_combat_text(player_pokemon.pokemon_name+" used "+ player_pokemon.get_move(selection).move_name)
+	yield(dialog_box,"text_finished")
 	battle_animation.play("opponent_damage_taken")
 	yield(battle_animation,"animation_finished")
 	player_pokemon.attack(player_pokemon.get_move(selection),opponent_pokemon)
@@ -155,8 +155,8 @@ func player_turn():
 		change_state(SELECT_ACTION)
 
 func trainer_turn():
-	dialog_box._set_dialog_text(opponent_pokemon.pokemon_name+" used "+opponent.choose_move().move_name, false)
-	yield(dialog_box,"dialog_finished")
+	dialog_box.set_combat_text(opponent_pokemon.pokemon_name+" used "+opponent.choose_move().move_name)
+	yield(dialog_box,"text_finished")
 	battle_animation.play("player_damage_taken")
 	yield(battle_animation,"animation_finished")
 	opponent_pokemon.attack(opponent.choose_move(),player_pokemon)
@@ -173,24 +173,24 @@ func trainer_turn():
 		change_state(SELECT_ACTION)
 
 func player_pokemon_dead():
-	dialog_box._set_dialog_text(player_pokemon.pokemon_name+" as fainted !", true)
+	dialog_box.set_combat_text(player_pokemon.pokemon_name+" as fainted !")
 	action_panel.hide()
 
 func opponent_pokemon_dead():
 	action_panel.hide()
-	dialog_box._set_dialog_text(opponent_pokemon.pokemon_name+" as fainted !", true)
+	dialog_box.set_combat_text(opponent_pokemon.pokemon_name+" as fainted !")
 	opponent_texture.visible = false
-	yield(dialog_box,"dialog_finished")
-	#yield(dialog_box, "key_pressed")
+	yield(dialog_box,"text_finished")
 	get_player_pokemon_data() #update exp bar 
-	player_pokemon.gain_experience(8000)
-	dialog_box._set_dialog_text(player_pokemon.pokemon_name+" gained "+str(player_pokemon.experience_total)+" experiences", true)
+	player_pokemon.gain_experience(900)
+	dialog_box.set_combat_text(player_pokemon.pokemon_name+" gained "+str(player_pokemon.experience_total)+" experiences")
 
 	opponent_frame.hide()
 	
 	change_state(GAIN_EXPERIENCE)
 
 func gain_experience():
+	#remplie la barre de progress au maximum pour chaque niveaux completé
 	for i in range(player_pokemon.level_completed):
 		if i < player_pokemon.level_completed - 1:
 			_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience_required)
@@ -198,11 +198,12 @@ func gain_experience():
 			player_frame.get_node("ExpBar").value = 0
 			
 		else:
+			#remplie le restant de la barre de progress avec le restant de l'experience
 			_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience)
 			yield(tween,"tween_completed")
 	
 	player_frame.get_node("Lvl").text = "lvl "+str(player_pokemon.level)
-	yield(dialog_box,"dialog_finished")
+	yield(dialog_box,"text_finished")
 	player_pokemon.reset_experience_total()
 	
 	if opponent.party.check_party_empty():
@@ -213,8 +214,8 @@ func gain_experience():
 
 func opponent_switch_pokemon():
 	get_opponent_pokemon_data()
-	dialog_box._set_dialog_text(opponent.trainer_name+" send out "+opponent_pokemon.pokemon_name)
-	yield(dialog_box,"dialog_finished")
+	dialog_box.set_combat_text(opponent.trainer_name+" send out "+opponent_pokemon.pokemon_name)
+	yield(dialog_box,"text_finished")
 	battle_animation.play_backwards("opponent_switch_pokemon")
 	yield(battle_animation,"animation_finished")
 	opponent_texture.visible = true
@@ -225,9 +226,8 @@ func opponent_switch_pokemon():
 
 func opponent_defeated():
 	action_panel.hide()
-	dialog_box._set_dialog_text("Congrulation you have beat ! "+opponent.trainer_name)
-	yield(dialog_box,"dialog_finished")
-	#yield(dialog_box,"key_pressed")
+	dialog_box.set_combat_text("Congrulation you have beat ! "+opponent.trainer_name)
+	yield(dialog_box,"text_finished")
 	queue_free()
 
 func _bar_animation(bar, stat):
@@ -247,11 +247,15 @@ func _on_Move2_pressed():
 	change_state(CHANGE_TURN)
 
 func _on_Move3_pressed():
-	pass 
+	selection = 2
+	change_state(CHANGE_TURN)
 
 func _on_Move4_pressed():
-	pass 
+	selection = 3
+	change_state(CHANGE_TURN)
 
 func on_BattleScene_state_changed():
 	update_battle()
 
+func _on_Run_pressed():
+	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Background/gym_battle.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://Scripts/BattleScene.gd" type="Script" id=5]
 [ext_resource path="res://Assets/NPC/red_battle_sprite.png" type="Texture" id=6]
 [ext_resource path="res://Resources/battle_animation.tres" type="Animation" id=7]
-[ext_resource path="res://Scenes/DialogBox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/CombatDialogBox.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Theme" id=1]
 
@@ -515,6 +515,8 @@ corner_radius_bottom_left = 10
 [sub_resource type="DynamicFont" id=37]
 font_data = ExtResource( 1 )
 
+[sub_resource type="DynamicFont" id=38]
+
 [node name="BattleScene" type="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -570,10 +572,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogBox" parent="." instance=ExtResource( 9 )]
-margin_top = 408.0
-margin_bottom = 472.0
-dialog = [  ]
+[node name="CombatDialogBox" parent="." instance=ExtResource( 8 )]
+margin_top = 410.0
+margin_bottom = 600.0
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -735,6 +736,7 @@ custom_styles/bg = SubResource( 29 )
 custom_fonts/font = SubResource( 30 )
 value = 100.0
 rounded = true
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -782,6 +784,7 @@ custom_styles/bg = SubResource( 29 )
 custom_fonts/font = SubResource( 34 )
 value = 100.0
 rounded = true
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -795,6 +798,7 @@ custom_styles/fg = SubResource( 35 )
 custom_styles/bg = SubResource( 36 )
 custom_fonts/font = SubResource( 37 )
 rounded = true
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -818,8 +822,12 @@ text = "Lvl 55"
 align = 1
 valign = 1
 
-[node name="BattleSong" type="AudioStreamPlayer2D" parent="."]
-autoplay = true
+[node name="Label" type="Label" parent="PlayerFrame"]
+margin_left = 127.0
+margin_top = 37.0
+margin_right = 182.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 38 )
 [connection signal="state_changed" from="." to="." method="on_BattleScene_state_changed"]
 [connection signal="mouse_entered" from="Moves/Move1" to="." method="_on_Move1_mouse_entered"]
 [connection signal="pressed" from="Moves/Move1" to="." method="_on_Move1_pressed"]
@@ -827,3 +835,4 @@ autoplay = true
 [connection signal="pressed" from="Moves/Move3" to="." method="_on_Move3_pressed"]
 [connection signal="pressed" from="Moves/Move4" to="." method="_on_Move4_pressed"]
 [connection signal="pressed" from="Action/Fight" to="." method="_on_Fight_pressed"]
+[connection signal="pressed" from="Action/Run" to="." method="_on_Run_pressed"]
