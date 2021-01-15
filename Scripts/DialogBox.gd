@@ -23,10 +23,12 @@ func _ready():
 
 func read_dialog(dialog):
 	if dialog_index<dialog.size():
-		text.bbcode_text = dialog[dialog_index]
-		text.percent_visible = 0
-		delay.start()
-		show()
+		if start == true:
+			text.bbcode_text = dialog[dialog_index]
+			text.percent_visible = 0
+			delay.start()
+			show()
+			start = false
 	else:
 		emit_signal("dialog_finished")
 		print("dialog finished")

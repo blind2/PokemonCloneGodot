@@ -23,6 +23,7 @@ func set_lady_team():
 	
 	lady.pre_battle_dialog =[
 		"I wonder if you are good enough for me?",
+		"this is a test string"
 	]
 	
 	lady.post_battle_dialog = [

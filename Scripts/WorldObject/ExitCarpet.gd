@@ -7,6 +7,8 @@ func _ready():
 
 func _on_ExitCarpet_body_entered(body):
 	if "Player" in body.name:
-		get_tree().change_scene_to(Global.world)
+		SceneChanger.change_scene(target_scene)
+#		var dialogbox_instance = dialog_box.instance()
+#		add_child(dialogbox_instance)
 		body.state = body.STOP
 		yield(SceneChanger,"scene_changed")

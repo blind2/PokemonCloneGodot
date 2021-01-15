@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/Party.gd"
 }, {
-"base": "Node",
-"class": "PlayerInput",
-"language": "GDScript",
-"path": "res://Scripts/Actor/PlayerInput.gd"
-}, {
 "base": "PokemonBaseStats",
 "class": "Pokemon",
 "language": "GDScript",
@@ -37,7 +32,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Move": "",
 "Party": "",
-"PlayerInput": "",
 "Pokemon": "",
 "PokemonBaseStats": ""
 }

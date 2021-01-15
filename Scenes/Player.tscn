@@ -117,6 +117,7 @@ tracks/0/keys = {
 extents = Vector2( 7, 10 )
 
 [sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 14.7099, 14.1653 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )

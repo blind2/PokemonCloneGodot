@@ -228,6 +228,8 @@ func opponent_defeated():
 	action_panel.hide()
 	dialog_box.set_combat_text("Congrulation you have beat ! "+opponent.trainer_name)
 	yield(dialog_box,"text_finished")
+	#set
+	opponent.status = opponent.STATUS.DEFEATED
 	queue_free()
 
 func _bar_animation(bar, stat):
