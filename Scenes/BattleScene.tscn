@@ -1,18 +1,23 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets/Background/gym_battle.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Background/red_battle.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Pokemon/Steelix.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Pokemon/Charizard.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/BattleScene.gd" type="Script" id=5]
 [ext_resource path="res://Assets/NPC/red_battle_sprite.png" type="Texture" id=6]
 [ext_resource path="res://Resources/battle_animation.tres" type="Animation" id=7]
 [ext_resource path="res://Scenes/CombatDialogBox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/pokeball.png" type="Texture" id=9]
+[ext_resource path="res://Resources/dark_panel.tres" type="StyleBox" id=10]
+[ext_resource path="res://Resources/battle_button_normal.tres" type="StyleBox" id=11]
+[ext_resource path="res://Resources/battle_frame.tres" type="StyleBox" id=12]
+[ext_resource path="res://Resources/battle_button_hover.tres" type="StyleBox" id=13]
+[ext_resource path="res://Resources/fg_hp_bar.tres" type="StyleBox" id=14]
+[ext_resource path="res://Resources/bg_hp_bar.tres" type="StyleBox" id=15]
+[ext_resource path="res://Resources/fg_exp_bar.tres" type="StyleBox" id=16]
 
 [sub_resource type="Theme" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="Animation" id=3]
 length = 0.5
@@ -29,7 +34,8 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
+resource_name = "opponent_switch"
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:rect_position")
 tracks/0/interp = 1
@@ -40,10 +46,23 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 621, 48.108 ), Vector2( 1024, 48.108 ) ]
+"values": [ Vector2( 635, 48 ), Vector2( 1024, 48 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OpponentPokemon:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 64, 64 ), Vector2( 64, 64 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
+resource_name = "opponent_switch_pokemon"
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:rect_position")
 tracks/0/interp = 1
@@ -54,7 +73,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1024, 48.108 ), Vector2( 621, 48.1078 ) ]
+"values": [ Vector2( 1024, 48 ), Vector2( 635, 48 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("OpponentPokemon:stretch_mode")
@@ -122,6 +141,45 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 1, 6 ]
+}
+
+[sub_resource type="Animation" id=39]
+resource_name = "pokeball_animation"
+tracks/0/type = "value"
+tracks/0/path = NodePath("OpponentPokemon:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ), ExtResource( 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OpponentPokemon:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ), Vector2( 20, 20 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("OpponentPokemon:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 708.46, 174.515 ), Vector2( 708.46, 174.515 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -260,204 +318,17 @@ tracks/5/keys = {
 "values": [ 1, 1 ]
 }
 
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=13]
-bg_color = Color( 0, 0, 0, 0.392157 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="DynamicFont" id=14]
 size = 30
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=15]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="DynamicFont" id=17]
 size = 30
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=18]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=20]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-
-[sub_resource type="StyleBoxFlat" id=21]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.321569, 0.321569, 0.321569, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="DynamicFont" id=23]
 size = 30
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=24]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=25]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=26]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 1, 1, 1, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=27]
-bg_color = Color( 0.529412, 0.529412, 0.529412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id=28]
-bg_color = Color( 0.403922, 0.941176, 0.0352941, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=29]
-bg_color = Color( 0.192157, 0.192157, 0.192157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="DynamicFont" id=30]
 font_data = ExtResource( 1 )
@@ -470,52 +341,11 @@ font_data = ExtResource( 1 )
 size = 30
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=33]
-bg_color = Color( 0.403922, 0.941176, 0.0352941, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 1
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="DynamicFont" id=34]
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=35]
-bg_color = Color( 0.0588235, 0.305882, 0.894118, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id=36]
-bg_color = Color( 0.192157, 0.192157, 0.192157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="DynamicFont" id=37]
 font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=38]
 
 [node name="BattleScene" type="Panel"]
 anchor_left = 0.5
@@ -527,7 +357,6 @@ margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 300.0
 theme = SubResource( 1 )
-custom_styles/panel = SubResource( 2 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -548,6 +377,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel" type="Panel" parent="."]
+margin_top = 410.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_styles/panel = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="PlayerPokemon" type="TextureRect" parent="."]
 margin_left = 158.0
 margin_top = 219.0
@@ -561,19 +399,22 @@ __meta__ = {
 }
 
 [node name="OpponentPokemon" type="TextureRect" parent="."]
-margin_left = 1024.0
-margin_top = 48.108
-margin_right = 1088.0
-margin_bottom = 112.108
+margin_left = 635.0
+margin_top = 48.0
+margin_right = 699.0
+margin_bottom = 112.0
 rect_min_size = Vector2( 3, 3 )
 rect_scale = Vector2( 3, 3 )
-stretch_mode = 6
+expand = true
+stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CombatDialogBox" parent="." instance=ExtResource( 8 )]
+margin_left = 15.0
 margin_top = 410.0
+margin_right = -13.0
 margin_bottom = 600.0
 
 [node name="Tween" type="Tween" parent="."]
@@ -581,11 +422,12 @@ margin_bottom = 600.0
 [node name="BattleAnimation" type="AnimationPlayer" parent="."]
 anims/opponent_damage_taken = ExtResource( 7 )
 anims/opponent_dead = SubResource( 3 )
-anims/opponent_switch = SubResource( 4 )
-anims/opponent_switch_pokemon = SubResource( 5 )
+anims/opponent_switch = SubResource( 5 )
+anims/opponent_switch_pokemon = SubResource( 4 )
 anims/player_damage_taken = SubResource( 6 )
 anims/player_switch = SubResource( 7 )
 anims/player_switch_pokemon = SubResource( 8 )
+anims/pokeball_animation = SubResource( 39 )
 anims/start_fight = SubResource( 9 )
 anims/start_fight_pokemon = SubResource( 10 )
 
@@ -596,7 +438,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -190.0
 margin_bottom = 6.10352e-05
-custom_styles/panel = SubResource( 11 )
+custom_styles/panel = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -606,8 +448,8 @@ margin_left = 192.0
 margin_top = 14.0
 margin_right = 452.0
 margin_bottom = 79.0
-custom_styles/hover = SubResource( 12 )
-custom_styles/normal = SubResource( 13 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 14 )
 text = "Attaque 1"
 __meta__ = {
@@ -619,8 +461,8 @@ margin_left = 568.0
 margin_top = 14.0
 margin_right = 828.0
 margin_bottom = 79.0
-custom_styles/hover = SubResource( 15 )
-custom_styles/normal = SubResource( 16 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 17 )
 text = "Attaque 2"
 __meta__ = {
@@ -632,8 +474,8 @@ margin_left = 192.0
 margin_top = 106.0
 margin_right = 452.0
 margin_bottom = 171.0
-custom_styles/hover = SubResource( 18 )
-custom_styles/normal = SubResource( 13 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 14 )
 text = "Attaque 3"
 __meta__ = {
@@ -645,8 +487,8 @@ margin_left = 568.0
 margin_top = 106.0
 margin_right = 828.0
 margin_bottom = 171.0
-custom_styles/hover = SubResource( 19 )
-custom_styles/normal = SubResource( 16 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 17 )
 text = "Attaque 4"
 __meta__ = {
@@ -658,7 +500,7 @@ visible = false
 margin_top = 410.0
 margin_right = 1024.0
 margin_bottom = 600.0
-custom_styles/panel = SubResource( 20 )
+custom_styles/panel = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -668,8 +510,8 @@ margin_left = 192.0
 margin_top = 14.0
 margin_right = 452.0
 margin_bottom = 78.0
-custom_styles/hover = SubResource( 21 )
-custom_styles/normal = SubResource( 22 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 23 )
 text = "Fight"
 __meta__ = {
@@ -681,8 +523,8 @@ margin_left = 568.0
 margin_top = 14.0
 margin_right = 828.0
 margin_bottom = 78.0
-custom_styles/hover = SubResource( 24 )
-custom_styles/normal = SubResource( 22 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 23 )
 text = "Pokemon"
 __meta__ = {
@@ -694,8 +536,8 @@ margin_left = 192.0
 margin_top = 106.0
 margin_right = 452.0
 margin_bottom = 170.0
-custom_styles/hover = SubResource( 25 )
-custom_styles/normal = SubResource( 22 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 23 )
 text = "Bag"
 __meta__ = {
@@ -707,8 +549,8 @@ margin_left = 568.0
 margin_top = 106.0
 margin_right = 828.0
 margin_bottom = 170.0
-custom_styles/hover = SubResource( 26 )
-custom_styles/normal = SubResource( 22 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/normal = ExtResource( 11 )
 custom_fonts/font = SubResource( 23 )
 text = "Run"
 __meta__ = {
@@ -716,12 +558,11 @@ __meta__ = {
 }
 
 [node name="OpponentFrame" type="Panel" parent="."]
-visible = false
 margin_left = 56.0
 margin_top = 32.0
 margin_right = 360.0
 margin_bottom = 112.0
-custom_styles/panel = SubResource( 27 )
+custom_styles/panel = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -731,8 +572,8 @@ margin_left = 2.0
 margin_top = 32.0
 margin_right = 300.0
 margin_bottom = 56.0
-custom_styles/fg = SubResource( 28 )
-custom_styles/bg = SubResource( 29 )
+custom_styles/fg = ExtResource( 14 )
+custom_styles/bg = ExtResource( 15 )
 custom_fonts/font = SubResource( 30 )
 value = 100.0
 rounded = true
@@ -764,12 +605,11 @@ __meta__ = {
 }
 
 [node name="PlayerFrame" type="Panel" parent="."]
-visible = false
 margin_left = 672.0
 margin_top = 294.418
 margin_right = 976.0
 margin_bottom = 395.418
-custom_styles/panel = SubResource( 27 )
+custom_styles/panel = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -779,8 +619,8 @@ margin_left = 3.0
 margin_top = 32.0
 margin_right = 300.0
 margin_bottom = 56.0
-custom_styles/fg = SubResource( 33 )
-custom_styles/bg = SubResource( 29 )
+custom_styles/fg = ExtResource( 14 )
+custom_styles/bg = ExtResource( 15 )
 custom_fonts/font = SubResource( 34 )
 value = 100.0
 rounded = true
@@ -794,8 +634,8 @@ margin_left = 3.0
 margin_top = 64.0
 margin_right = 300.0
 margin_bottom = 88.0
-custom_styles/fg = SubResource( 35 )
-custom_styles/bg = SubResource( 36 )
+custom_styles/fg = ExtResource( 16 )
+custom_styles/bg = ExtResource( 15 )
 custom_fonts/font = SubResource( 37 )
 rounded = true
 percent_visible = false
@@ -821,13 +661,6 @@ custom_fonts/font = SubResource( 32 )
 text = "Lvl 55"
 align = 1
 valign = 1
-
-[node name="Label" type="Label" parent="PlayerFrame"]
-margin_left = 127.0
-margin_top = 37.0
-margin_right = 182.0
-margin_bottom = 51.0
-custom_fonts/font = SubResource( 38 )
 [connection signal="state_changed" from="." to="." method="on_BattleScene_state_changed"]
 [connection signal="mouse_entered" from="Moves/Move1" to="." method="_on_Move1_mouse_entered"]
 [connection signal="pressed" from="Moves/Move1" to="." method="_on_Move1_pressed"]

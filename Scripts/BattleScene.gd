@@ -42,6 +42,7 @@ func create_battle_scene(player, opponent):
 
 func _ready():
 	update_battle()
+	#print(str(player_pokemon.get_amount_of_experience(opponent_pokemon)))
 
 func change_state(state):
 	battle_state = state
@@ -102,6 +103,7 @@ func battle_intro():
 	opponent_texture.texture = opponent.battle_sprite
 	battle_animation.play("start_fight")
 	dialog_box.set_combat_text(opponent.trainer_name+" would like to battle")
+	yield(get_tree().create_timer(2),"timeout")
 	yield(dialog_box,"text_finished")
 	battle_animation.play("opponent_switch")
 	dialog_box.set_combat_text(opponent.name+" send out "+opponent_pokemon.pokemon_name+" !")
@@ -109,6 +111,7 @@ func battle_intro():
 	battle_animation.play("opponent_switch_pokemon")
 	opponent_texture.texture = (load("res://Assets/Pokemon/"+opponent_pokemon.pokemon_name+".png"))
 	yield(battle_animation,"animation_finished")
+	
 	battle_animation.play("player_switch")
 	dialog_box.set_combat_text("Go "+player_pokemon.pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
@@ -154,6 +157,9 @@ func player_turn():
 	else:
 		change_state(SELECT_ACTION)
 
+"""
+Le pokemon adversse attaque le pokemon du joueur 
+"""
 func trainer_turn():
 	dialog_box.set_combat_text(opponent_pokemon.pokemon_name+" used "+opponent.choose_move().move_name)
 	yield(dialog_box,"text_finished")
@@ -179,10 +185,11 @@ func player_pokemon_dead():
 func opponent_pokemon_dead():
 	action_panel.hide()
 	dialog_box.set_combat_text(opponent_pokemon.pokemon_name+" as fainted !")
+	yield(get_tree().create_timer(2),"timeout")
 	opponent_texture.visible = false
 	yield(dialog_box,"text_finished")
 	get_player_pokemon_data() #update exp bar 
-	player_pokemon.gain_experience(900)
+	player_pokemon.gain_experience(player_pokemon.get_amount_of_experience(opponent_pokemon))
 	dialog_box.set_combat_text(player_pokemon.pokemon_name+" gained "+str(player_pokemon.experience_total)+" experiences")
 
 	opponent_frame.hide()
@@ -191,16 +198,16 @@ func opponent_pokemon_dead():
 
 func gain_experience():
 	#remplie la barre de progress au maximum pour chaque niveaux completé
-	for i in range(player_pokemon.level_completed):
-		if i < player_pokemon.level_completed - 1:
-			_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience_required)
-			yield(tween,"tween_completed")
-			player_frame.get_node("ExpBar").value = 0
-			
-		else:
-			#remplie le restant de la barre de progress avec le restant de l'experience
-			_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience)
-			yield(tween,"tween_completed")
+	if player_pokemon.level_completed > 0:
+		for i in range(player_pokemon.level_completed):
+			if i < player_pokemon.level_completed - 1:
+				_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience_required)
+				yield(tween,"tween_completed")
+				player_frame.get_node("ExpBar").value = 0
+	
+	#remplie le restant de la barre de progress avec le restant de l'experience
+	_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience)
+	yield(tween,"tween_completed")
 	
 	player_frame.get_node("Lvl").text = "lvl "+str(player_pokemon.level)
 	yield(dialog_box,"text_finished")
@@ -228,8 +235,12 @@ func opponent_defeated():
 	action_panel.hide()
 	dialog_box.set_combat_text("Congrulation you have beat ! "+opponent.trainer_name)
 	yield(dialog_box,"text_finished")
+	yield(get_tree().create_timer(2),"timeout")
+	
 	#set
 	opponent.status = opponent.STATUS.DEFEATED
+	player.state = player.WALK
+	player.battle_started = false
 	queue_free()
 
 func _bar_animation(bar, stat):

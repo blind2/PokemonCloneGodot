@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/small_house.png" type="Texture" id=1]
+[ext_resource path="res://Assets/SpriteSheets/building.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Interior/SmallHouseInterior.tscn" type="PackedScene" id=3]
 
@@ -13,12 +13,13 @@ extents = Vector2( 39.3346, 28.2668 )
 position = Vector2( 0, -1.80303 )
 scale = Vector2( 1, 1.06439 )
 texture = ExtResource( 1 )
-region_rect = Rect2( 111, 17, 86, 64 )
+region_enabled = true
+region_rect = Rect2( 204, 17, 90, 79 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.630138, 3.42807 )
 shape = SubResource( 1 )
 
 [node name="Door" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0.489161, 23.3922 )
+position = Vector2( -17.0339, 29.4156 )
 target_scene = ExtResource( 3 )

@@ -2,14 +2,13 @@ extends KinematicBody2D
 
 var party = Party.new()
 var status = STATUS.UNDEFEATED
-var battle_scene = preload("res://Scenes/BattleScene.tscn")
-
-onready var dialog_box = get_node("/root/World/GameUI/DialogBox")
+var can_talk = true
 onready var game_ui = get_node("/root/World/GameUI")
 
 onready var sprite = get_node("Sprite")
 onready var change_direction = get_node("ChangeDirectionDelay")
 onready var player = get_node("/root/World/Forest/YSort/Player")
+onready var dialog_box = get_node("/root/World/GameUI/DialogBox")
 
 onready var dialog_zone = get_node("DialogZone")
 
@@ -33,7 +32,7 @@ func _ready():
 	position = position.snapped(Vector2.ONE * 16) 
 	position += Vector2.ONE * 16/2 
 	
-	change_direction.wait_time = 0.8
+	change_direction.wait_time = 2
 	change_direction.start()
 
 func interact():
@@ -44,13 +43,14 @@ func interact():
 
 func get_post_battle_dialog():
 	print(post_battle_dialog)
-	Global.dialog_box.dialog = post_battle_dialog
+	dialog_box.dialog = post_battle_dialog
 	dialog_box.read_dialog(post_battle_dialog)
 
 func get_pre_battle_dialog():
 	print(pre_battle_dialog)
 	dialog_box.dialog = pre_battle_dialog
-	dialog_box.read_dialog(pre_battle_dialog)
+	if can_talk == true:
+		dialog_box.read_dialog(pre_battle_dialog)
 
 """
 Ropositione le NPC vers la direction du joueur quand il communique avec le joueur
@@ -86,13 +86,6 @@ func choose_move():
 	
 	 return  party.get_pokemon().list_of_moves[random_number]
 
-func start_fight():
-	yield(dialog_box,"dialog_finished")
-	SceneChanger.transition_effect()
-	yield(SceneChanger,"transition_finished")
-	var new_battle_scene = battle_scene.instance()
-	new_battle_scene.create_battle_scene(player,self)
-	game_ui.add_child(new_battle_scene)
 
 
 func set_trainer_frame(frame):

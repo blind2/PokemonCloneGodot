@@ -4,12 +4,17 @@ var speed
 var state = WALK
 var current_direction
 var party = Party.new()
+var can_interact = true
+var battle_scene = load("res://Scenes/BattleScene.tscn")
+var battle_started = false
 
 onready var sprite = get_node("Sprite")
 onready var tween = get_node("Tween")
 onready var ray_cast = get_node("RayCast2D")
 onready var animation_player = get_node("AnimationPlayer")
 onready var interact_range = get_node("InteractRange")
+onready var dialog_box = get_node("/root/World/GameUI/DialogBox")
+onready var game_ui = get_node("/root/World/GameUI")
 
 const TILE_SIZE = 16
 const WALK_SPEED = 0.5
@@ -41,18 +46,29 @@ func _physics_process(delta):
 		STOP:
 			speed = STOP_SPEED
 
-"""
-Verifie si la zone de dialogue qui suit le joueur entre en collision 
-avec tout les objects du jeux qui contient la methode Interact()
-"""
 func dialog_range():
-	if Input.is_action_just_pressed("ui_a"):
+	if accept(): # touche "a"
 		for body in interact_range.get_overlapping_bodies():
 			if body.has_method("interact"):
+				state = STOP
+				
 				body.interact()
 				body.refacing(self)
-				if body.status == body.STATUS.UNDEFEATED:
-					body.start_fight()
+				yield(dialog_box,"dialog_finished")
+				if body.status == body.STATUS.UNDEFEATED and battle_started == false:
+					body.can_talk = false
+					start_battle(body)
+				elif body.status == body.STATUS.DEFEATED:
+					state = WALK
+
+func start_battle(opponent):
+	battle_started = true
+	SceneChanger.transition_effect()
+	yield(SceneChanger,"transition_finished")
+	var new_battle_scene = battle_scene.instance()
+	new_battle_scene.create_battle_scene(self, opponent)
+	print("battle")
+	game_ui.add_child(new_battle_scene)
 
 func prevent_moving():
 	if state != STOP:
@@ -106,7 +122,7 @@ func run():
 	get_input("run")
 
 func accept():
-	if Input.is_action_just_pressed("ui_a"):
+	if Input.is_action_just_pressed("ui_a") and can_interact == true:
 		return true
 	elif Input.is_action_just_released("ui_a"):
 		return false

@@ -39,6 +39,9 @@ func get_stat(base_stat, stat):
 func add_move(new_move):
 	list_of_moves.append(new_move)
 
+func get_amount_of_experience(opponent_pokemon):
+	return round (pow(opponent_pokemon.level,1.8))
+
 func gain_experience(amount):
 	experience_total += amount
 	experience += amount

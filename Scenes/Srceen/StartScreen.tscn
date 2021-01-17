@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Resources/dark_panel.tres" type="StyleBox" id=1]
+
+[node name="StartScreen" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.58667
+margin_right = 1.58667
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 283.302
+margin_top = 138.755
+margin_right = 693.302
+margin_bottom = 221.755
+__meta__ = {
+"_edit_use_anchors_": false
+}

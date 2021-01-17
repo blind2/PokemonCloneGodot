@@ -3,12 +3,14 @@ extends Node2D
 onready var player = get_node("YSort/Player")
 onready var lady = get_node("YSort/Lady")
 onready var bug_catcher = get_node("YSort/Josh")
+onready var house = get_node("YSort/House")
 
 onready var dialog_box = $DialogBox
 
 func _ready():
 	player.position = Global.player_spawn_position
 	Global.align_object_with_grid(player)
+	Global.align_object_with_grid(house)
 	#get every node inside this
 	set_bug_catcher_team()
 	set_lady_team()
