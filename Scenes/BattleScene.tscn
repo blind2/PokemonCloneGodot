@@ -19,7 +19,7 @@
 
 [sub_resource type="Theme" id=1]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:visible")
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "opponent_switch"
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:rect_position")
@@ -88,7 +88,7 @@ tracks/1/keys = {
 "values": [ 1, 1 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:visible")
@@ -103,7 +103,7 @@ tracks/0/keys = {
 "values": [ true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:rect_position")
 tracks/0/interp = 1
@@ -117,7 +117,7 @@ tracks/0/keys = {
 "values": [ Vector2( 158, 219 ), Vector2( -200, 219 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("PlayerPokemon:rect_position")
 tracks/0/interp = 1
@@ -143,7 +143,7 @@ tracks/1/keys = {
 "values": [ 1, 1, 6 ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=8]
 resource_name = "pokeball_animation"
 tracks/0/type = "value"
 tracks/0/path = NodePath("OpponentPokemon:texture")
@@ -318,33 +318,33 @@ tracks/5/keys = {
 "values": [ 1, 1 ]
 }
 
+[sub_resource type="DynamicFont" id=11]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 30
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=14]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=16]
 size = 30
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=17]
-size = 30
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=23]
-size = 30
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=30]
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=31]
-size = 30
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=32]
-size = 30
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=34]
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=37]
+[sub_resource type="DynamicFont" id=18]
 font_data = ExtResource( 1 )
 
 [node name="BattleScene" type="Panel"]
@@ -421,13 +421,13 @@ margin_bottom = 600.0
 
 [node name="BattleAnimation" type="AnimationPlayer" parent="."]
 anims/opponent_damage_taken = ExtResource( 7 )
-anims/opponent_dead = SubResource( 3 )
-anims/opponent_switch = SubResource( 5 )
+anims/opponent_dead = SubResource( 2 )
+anims/opponent_switch = SubResource( 3 )
 anims/opponent_switch_pokemon = SubResource( 4 )
-anims/player_damage_taken = SubResource( 6 )
-anims/player_switch = SubResource( 7 )
-anims/player_switch_pokemon = SubResource( 8 )
-anims/pokeball_animation = SubResource( 39 )
+anims/player_damage_taken = SubResource( 5 )
+anims/player_switch = SubResource( 6 )
+anims/player_switch_pokemon = SubResource( 7 )
+anims/pokeball_animation = SubResource( 8 )
 anims/start_fight = SubResource( 9 )
 anims/start_fight_pokemon = SubResource( 10 )
 
@@ -450,7 +450,7 @@ margin_right = 452.0
 margin_bottom = 79.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 11 )
 text = "Attaque 1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -463,7 +463,7 @@ margin_right = 828.0
 margin_bottom = 79.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 12 )
 text = "Attaque 2"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -476,7 +476,7 @@ margin_right = 452.0
 margin_bottom = 171.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 11 )
 text = "Attaque 3"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -489,7 +489,7 @@ margin_right = 828.0
 margin_bottom = 171.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 12 )
 text = "Attaque 4"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -512,7 +512,7 @@ margin_right = 452.0
 margin_bottom = 78.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 13 )
 text = "Fight"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -525,7 +525,7 @@ margin_right = 828.0
 margin_bottom = 78.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 13 )
 text = "Pokemon"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -538,7 +538,7 @@ margin_right = 452.0
 margin_bottom = 170.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 13 )
 text = "Bag"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -551,13 +551,14 @@ margin_right = 828.0
 margin_bottom = 170.0
 custom_styles/hover = ExtResource( 13 )
 custom_styles/normal = ExtResource( 11 )
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 13 )
 text = "Run"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OpponentFrame" type="Panel" parent="."]
+visible = false
 margin_left = 56.0
 margin_top = 32.0
 margin_right = 360.0
@@ -574,7 +575,7 @@ margin_right = 300.0
 margin_bottom = 56.0
 custom_styles/fg = ExtResource( 14 )
 custom_styles/bg = ExtResource( 15 )
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 14 )
 value = 100.0
 rounded = true
 percent_visible = false
@@ -586,7 +587,7 @@ __meta__ = {
 margin_left = 8.0
 margin_right = 72.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 15 )
 text = "Steelix"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -596,7 +597,7 @@ __meta__ = {
 margin_left = 245.033
 margin_right = 299.033
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 32 )
+custom_fonts/font = SubResource( 16 )
 text = "Lvl 60"
 align = 1
 valign = 1
@@ -605,6 +606,7 @@ __meta__ = {
 }
 
 [node name="PlayerFrame" type="Panel" parent="."]
+visible = false
 margin_left = 672.0
 margin_top = 294.418
 margin_right = 976.0
@@ -621,7 +623,7 @@ margin_right = 300.0
 margin_bottom = 56.0
 custom_styles/fg = ExtResource( 14 )
 custom_styles/bg = ExtResource( 15 )
-custom_fonts/font = SubResource( 34 )
+custom_fonts/font = SubResource( 17 )
 value = 100.0
 rounded = true
 percent_visible = false
@@ -636,7 +638,7 @@ margin_right = 300.0
 margin_bottom = 88.0
 custom_styles/fg = ExtResource( 16 )
 custom_styles/bg = ExtResource( 15 )
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 18 )
 rounded = true
 percent_visible = false
 __meta__ = {
@@ -647,7 +649,7 @@ __meta__ = {
 margin_left = 8.0
 margin_right = 72.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 15 )
 text = "Charizard"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -657,7 +659,7 @@ __meta__ = {
 margin_left = 243.6
 margin_right = 297.6
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 32 )
+custom_fonts/font = SubResource( 16 )
 text = "Lvl 55"
 align = 1
 valign = 1

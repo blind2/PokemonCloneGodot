@@ -74,9 +74,9 @@ func update_battle():
 
 
 func get_player_pokemon_data():
-	player_pokemon = player.party.get_pokemon()
+	player_pokemon = player.party.get_pokemon() #represente le premier pokemon de l'equipe de du joueur
 	
-	player_texture.texture = (load("res://Assets/Pokemon/"+player_pokemon.pokemon_name+".png"))
+	player_texture.texture = (load("res://Assets/Pokemon/Back/"+player_pokemon.back_sprite))
 	player_frame.get_node("HpBar").max_value = player_pokemon.hp
 	player_frame.get_node("HpBar").value = player_pokemon.current_hp
 	player_frame.get_node("ExpBar").max_value = player_pokemon.experience_required
@@ -89,9 +89,9 @@ func get_player_pokemon_data():
 	moves_panel.get_node("Move4").text = player_pokemon.get_move(3).move_name
 
 func get_opponent_pokemon_data():
-	opponent_pokemon = opponent.party.get_pokemon()
+	opponent_pokemon = opponent.party.get_pokemon() #represente le premier pokemon de l'equipe de l'adverssaire
 	
-	opponent_texture.texture = (load("res://Assets/Pokemon/"+opponent_pokemon.pokemon_name+".png"))
+	opponent_texture.texture = (load("res://Assets/Pokemon/Front/"+opponent_pokemon.front_sprite))
 	opponent_frame.get_node("HpBar").max_value = opponent_pokemon.hp
 	opponent_frame.get_node("HpBar").value = opponent_pokemon.current_hp
 	opponent_frame.get_node("Lvl").text = "lvl "+str(opponent_pokemon.level)
@@ -109,24 +109,21 @@ func battle_intro():
 	dialog_box.set_combat_text(opponent.name+" send out "+opponent_pokemon.pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("opponent_switch_pokemon")
-	opponent_texture.texture = (load("res://Assets/Pokemon/"+opponent_pokemon.pokemon_name+".png"))
+	opponent_texture.texture = (load("res://Assets/Pokemon/Front/"+opponent_pokemon.front_sprite))
+	print(opponent_texture.texture)
 	yield(battle_animation,"animation_finished")
 	
 	battle_animation.play("player_switch")
 	dialog_box.set_combat_text("Go "+player_pokemon.pokemon_name+" !")
 	yield(battle_animation,"animation_finished")
 	battle_animation.play("player_switch_pokemon")
-	player_texture.texture = (load("res://Assets/Pokemon/"+player_pokemon.pokemon_name+".png"))
+	player_texture.texture = (load("res://Assets/Pokemon/Back/"+player_pokemon.back_sprite))
 	yield(battle_animation,"animation_finished")
 	player_frame.show()
 	opponent_frame.show()
 	
 	change_state(SELECT_ACTION)
 
-"""
-Determine quelle pokemon qui a la plus grande vitesse pour qu'il attaque en premier.
-Si les deux pokemon on la meme vitesse on lancera un dée pour déterminer se pokemon.
-"""
 func change_turn():
 	moves_panel.hide()
 	if player_pokemon.speed > opponent_pokemon.speed:
@@ -157,9 +154,6 @@ func player_turn():
 	else:
 		change_state(SELECT_ACTION)
 
-"""
-Le pokemon adversse attaque le pokemon du joueur 
-"""
 func trainer_turn():
 	dialog_box.set_combat_text(opponent_pokemon.pokemon_name+" used "+opponent.choose_move().move_name)
 	yield(dialog_box,"text_finished")
@@ -203,7 +197,7 @@ func gain_experience():
 			if i < player_pokemon.level_completed - 1:
 				_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience_required)
 				yield(tween,"tween_completed")
-				player_frame.get_node("ExpBar").value = 0
+				player_frame.get_node("ExpBar").value = 0 #remmet la barre à 0 quand elle est a 100 %
 	
 	#remplie le restant de la barre de progress avec le restant de l'experience
 	_bar_animation(player_frame.get_node("ExpBar"),player_pokemon.experience)
@@ -237,10 +231,9 @@ func opponent_defeated():
 	yield(dialog_box,"text_finished")
 	yield(get_tree().create_timer(2),"timeout")
 	
-	#set
-	opponent.status = opponent.STATUS.DEFEATED
-	player.state = player.WALK
-	player.battle_started = false
+	opponent.status = opponent.STATUS.DEFEATED # change le status du joueur pour ne plus le re combattre
+	player.state = player.WALK #change l'etat du joueur pour marcher
+	player.is_battling = false 
 	queue_free()
 
 func _bar_animation(bar, stat):

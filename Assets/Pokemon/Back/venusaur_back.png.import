@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Venusaur.png-90fb7a5e23560ec99f8bb52810361a68.stex"
+path="res://.import/venusaur_back.png-985bc5ee564332ef775be87e7b333022.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pokemon/Venusaur.png"
-dest_files=[ "res://.import/Venusaur.png-90fb7a5e23560ec99f8bb52810361a68.stex" ]
+source_file="res://Assets/Pokemon/Back/venusaur_back.png"
+dest_files=[ "res://.import/venusaur_back.png-985bc5ee564332ef775be87e7b333022.stex" ]
 
 [params]
 

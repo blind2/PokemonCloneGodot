@@ -19,21 +19,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Actor/Party.gd"
 }, {
-"base": "PokemonBaseStats",
+"base": "Node",
 "class": "Pokemon",
 "language": "GDScript",
 "path": "res://Scripts/Pokemon.gd"
-}, {
-"base": "Node",
-"class": "PokemonBaseStats",
-"language": "GDScript",
-"path": "res://Scripts/PokemonBaseStats.gd"
 } ]
 _global_script_class_icons={
 "Move": "",
 "Party": "",
-"Pokemon": "",
-"PokemonBaseStats": ""
+"Pokemon": ""
 }
 
 [application]
@@ -46,6 +40,8 @@ config/icon="res://icon.png"
 
 SceneChanger="*res://Scenes/SceneChanger.tscn"
 Global="*res://scripts/Global.gd"
+PokemonData="*res://Scripts/Data/PokemonData.gd"
+MoveData="*res://Scripts/Data/MoveData.gd"
 
 [display]
 

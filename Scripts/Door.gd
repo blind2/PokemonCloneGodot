@@ -1,10 +1,8 @@
 extends Area2D
 
-
-onready var sprite_animation = get_node("AnimatedSprite")
-export	(String, "open_door", "open_gym_door") var door_animation
+onready var animation_player = get_node("AnimationPlayer")
 export (PackedScene) var target_scene 
-# export(Texture) var sprite
+onready var player = get_node("/root/World/Forest/YSort/Player")
 
 
 func _on_Door_body_entered(body):
@@ -13,9 +11,12 @@ func _on_Door_body_entered(body):
 		Global.player_spawn_position = self.global_position
 		if Global.enter == true:
 			body.state = body.STOP
-			sprite_animation.show()
-			sprite_animation.play(door_animation)
-			yield(sprite_animation,"animation_finished")
+			animation_player.play("open_door")
+			yield(animation_player,"animation_finished")
+			player.animation_player.play("move_up")
+			yield(player.animation_player,"animation_finished")
+			animation_player.play_backwards("open_door")
+			yield(animation_player,"animation_finished")
 			SceneChanger.change_scene(target_scene)
 			
 			Global.enter = false

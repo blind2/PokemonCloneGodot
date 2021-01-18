@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Feraligatr.png-4564bc034d1d1a347c6e02cf812c4876.stex"
+path="res://.import/open_door.png-09a0d218aaaee8d780b434b3dda1c70d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pokemon/Feraligatr.png"
-dest_files=[ "res://.import/Feraligatr.png-4564bc034d1d1a347c6e02cf812c4876.stex" ]
+source_file="res://Assets/SpriteSheets/open_door.png"
+dest_files=[ "res://.import/open_door.png-09a0d218aaaee8d780b434b3dda1c70d.stex" ]
 
 [params]
 

@@ -6,7 +6,7 @@ var current_direction
 var party = Party.new()
 var can_interact = true
 var battle_scene = load("res://Scenes/BattleScene.tscn")
-var battle_started = false
+var is_battling = false
 
 onready var sprite = get_node("Sprite")
 onready var tween = get_node("Tween")
@@ -55,14 +55,14 @@ func dialog_range():
 				body.interact()
 				body.refacing(self)
 				yield(dialog_box,"dialog_finished")
-				if body.status == body.STATUS.UNDEFEATED and battle_started == false:
+				if body.status == body.STATUS.UNDEFEATED and is_battling == false:
 					body.can_talk = false
 					start_battle(body)
 				elif body.status == body.STATUS.DEFEATED:
 					state = WALK
 
 func start_battle(opponent):
-	battle_started = true
+	is_battling = true
 	SceneChanger.transition_effect()
 	yield(SceneChanger,"transition_finished")
 	var new_battle_scene = battle_scene.instance()
@@ -137,17 +137,18 @@ func back():
 Creation d'une équipe de pokemon pour le joueur
 """
 func pokemon_team():
-	var charizard = Pokemon.new("Charizard", 100, 78, 84, 78, 109, 85, 100)
-	var flamethrower = Move.new("Flamethrower", 75, 100, "Fire", "Special", 10)
-	var dragon_claw = Move.new("Dragon Claw", 60, 100, "Dragon", "Physical", 5)
+	var charizard = Pokemon.new(50, PokemonData.charizard)
+	var flamethrower = Move.new(MoveData.flamethrower)
+	var dragon_claw = Move.new(MoveData.dragon_claw)
+	
 	charizard.add_move(flamethrower)
 	charizard.add_move(dragon_claw)
 	
-	var venusaur = Pokemon.new("Venusaur", 90, 80, 82, 83, 100, 100, 80 )
-	var razor_leaf = Move.new("Razor Leaf", 55, 95, "Grass", "Physical", 25)
-	var double_edge = Move.new("Double Edge", 120, 100, "Normal", "Physical",5)
-	var earthquake = Move.new("Earthquake", 100, 100, "Ground", "Physical", 10)
-	var sludge_bomb = Move.new("Sludge Bomb", 90, 100, "Poison", "Special", 10)
+	var venusaur = Pokemon.new(90, PokemonData.venusaur)
+	var razor_leaf = Move.new(MoveData.razor_leaf)
+	var double_edge = Move.new(MoveData.double_edge)
+	var earthquake = Move.new(MoveData.earthquake)
+	var sludge_bomb = Move.new(MoveData.sludge_bomb)
 	
 	venusaur.add_move(razor_leaf)
 	venusaur.add_move(double_edge)

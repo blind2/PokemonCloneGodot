@@ -7,10 +7,6 @@ var player_spawn_position = Vector2(300,300)
 var enter = true
 const TILE_SIZE = 16
 
-#pour le combat
-var player
-var opponent
-
 func get_player_position(player):
 	player_spawn_position = player.position
 

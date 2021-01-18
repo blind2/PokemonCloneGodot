@@ -1,4 +1,4 @@
-extends PokemonBaseStats
+extends Node
 class_name Pokemon
 
 var pokemon_name
@@ -10,28 +10,38 @@ var defense
 var special_attack
 var special_defense
 var speed
+var front_sprite
+var back_sprite
 
 var is_dead = false
 var current_hp
+
 var experience_total =  0
 var experience = 0
-var experience_required = _get_required_experience(level)
+var experience_required
 var level_completed = 0
+
 var list_of_moves = []
 
-func _init(pokemon_name, level, base_hp, base_attack, base_defense, base_special_attack, base_special_defense, base_speed).(base_hp, base_attack, base_defense, base_special_attack, base_special_defense, base_speed):
-	self.pokemon_name = pokemon_name
+func _init(level, pokemon):
+	#information sur le pokemon
 	self.level = level
-	self.hp = get_stat(base_hp, hp)
-	self.attack = get_stat(base_attack, attack)
-	self.defense = get_stat(base_defense, defense)
-	self.special_attack = get_stat(base_special_attack, special_attack)
-	self.special_defense = get_stat(base_special_defense, special_defense)
-	self.speed = get_stat(base_speed, speed)
-	current_hp = hp
+	pokemon_name = pokemon["name"]
+	type = pokemon["type"]
+	front_sprite = pokemon["front_sprite"]
+	back_sprite = pokemon["back_sprite"]
 	
+	#pokemon stats
+	hp = get_stat(pokemon["base_hp"], hp)
+	attack = get_stat(pokemon["base_attack"], attack)
+	defense = get_stat(pokemon["base_defense"], defense)
+	special_attack = get_stat(pokemon["base_special_attack"], special_attack)
+	special_defense = get_stat(pokemon['base_special_defense'], special_defense)
+	speed = get_stat(pokemon["base_speed"], speed)
+	
+	current_hp = hp
+	experience_required = get_required_experience()
 
-#Calcule la statistique du pokemon selon la stat de base
 func get_stat(base_stat, stat):
 	stat =  base_stat + level * 2
 	return stat
@@ -56,12 +66,11 @@ func reset_experience_total():
 
 func _lvl_up():
 	level += 1
-	experience_required = _get_required_experience(level)
+	experience_required = get_required_experience()
 	print(level)
-	
 
-func _get_required_experience(lvl):
-	return round (pow(lvl,1.8) + lvl * 4)
+func get_required_experience():
+	return round (pow(level,1.8) + level * 4)
 
 func attack(move, pokemon):
 	if pokemon.current_hp>0:

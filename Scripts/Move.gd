@@ -5,18 +5,16 @@ var move_name
 var power
 var accuracy
 var type
-var category
 var pp
 
 var max_pp
 var damage
 
-func _init(move_name, power, accuracy, type, category, pp):
-	self.move_name = move_name
-	self.power = power
-	self.accuracy = accuracy
-	self.type = type
-	self.category = category
-	self.pp = pp
+func _init(move):
+	self.move_name = move["name"]
+	self.power = move["power"]
+	self.accuracy = move["accuracy"]
+	self.type = move["type"]
+	self.pp = move["pp"]
 	self.max_pp = pp
 

@@ -216,11 +216,11 @@ cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
 tile_data = PoolIntArray( 524301, 0, 0, 524303, 0, 0, 524305, 0, 0, 589838, 0, 0, 589840, 0, 0, 589848, 0, 0, 589859, 0, 0, 589861, 0, 0, 655373, 0, 0, 655375, 0, 0, 655377, 0, 0, 720932, 0, 0, 917537, 0, 0, 983072, 0, 0, 983074, 0, 0, 1441814, 0, 0, 1441815, 0, 0, 1441816, 0, 0, 1441817, 0, 0, 1441818, 0, 0, 1441819, 0, 0, 1441820, 0, 0, 1507350, 0, 0, 1507351, 0, 0, 1507352, 0, 0, 1507353, 0, 0, 1507354, 0, 0, 1507355, 0, 0, 1507356, 0, 0, 1572886, 0, 0, 1572887, 0, 0, 1572888, 0, 0, 1572889, 0, 0, 1572890, 0, 0, 1572891, 0, 0, 1572892, 0, 0, 1638422, 0, 0, 1638423, 0, 0, 1638424, 0, 0, 1638425, 0, 0, 1638426, 0, 0, 1638427, 0, 0, 1638428, 0, 0 )
 
-[node name="Player" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 347.609, 254.243 )
-
 [node name="House" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 469.842, 199.768 )
+position = Vector2( 456.838, 214.2 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 331.013, 260.481 )
 
 [node name="Josh" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 320.167, 192.226 )
