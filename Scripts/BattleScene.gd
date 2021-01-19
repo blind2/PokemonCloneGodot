@@ -36,11 +36,12 @@ enum{
 	GAIN_EXPERIENCE
 }
 
-func create_battle_scene(player, opponent):
-	self.player = player
-	self.opponent = opponent
+#func create_battle_scene(player, opponent):
+#	self.player = player
+#	self.opponent = opponent
 
 func _ready():
+	print(opponent)
 	update_battle()
 	#print(str(player_pokemon.get_amount_of_experience(opponent_pokemon)))
 
@@ -74,7 +75,7 @@ func update_battle():
 
 
 func get_player_pokemon_data():
-	player_pokemon = player.party.get_pokemon() #represente le premier pokemon de l'equipe de du joueur
+	player_pokemon = Global.player_party.get_pokemon() #represente le premier pokemon de l'equipe de du joueur
 	
 	player_texture.texture = (load("res://Assets/Pokemon/Back/"+player_pokemon.back_sprite))
 	player_frame.get_node("HpBar").max_value = player_pokemon.hp
@@ -89,7 +90,7 @@ func get_player_pokemon_data():
 	moves_panel.get_node("Move4").text = player_pokemon.get_move(3).move_name
 
 func get_opponent_pokemon_data():
-	opponent_pokemon = opponent.party.get_pokemon() #represente le premier pokemon de l'equipe de l'adverssaire
+	opponent_pokemon = Global.opponent_party.get_pokemon() #represente le premier pokemon de l'equipe de l'adverssaire
 	
 	opponent_texture.texture = (load("res://Assets/Pokemon/Front/"+opponent_pokemon.front_sprite))
 	opponent_frame.get_node("HpBar").max_value = opponent_pokemon.hp
@@ -100,7 +101,7 @@ func get_opponent_pokemon_data():
 func battle_intro():
 	get_player_pokemon_data()
 	get_opponent_pokemon_data()
-	opponent_texture.texture = opponent.battle_sprite
+	opponent_texture.texture = Global.opponent_sprite
 	battle_animation.play("start_fight")
 	dialog_box.set_combat_text(opponent.trainer_name+" would like to battle")
 	yield(get_tree().create_timer(2),"timeout")

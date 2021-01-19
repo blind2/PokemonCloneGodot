@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Interior/SmallHouseInterior.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 39.3346, 28.2668 )
+extents = Vector2( 39.3346, 27.5966 )
 
 [node name="House" type="StaticBody2D"]
 
@@ -17,7 +17,7 @@ region_enabled = true
 region_rect = Rect2( 204, 17, 90, 79 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.630138, 3.42807 )
+position = Vector2( -1.2725, 2.95241 )
 shape = SubResource( 1 )
 
 [node name="Door" parent="." instance=ExtResource( 2 )]

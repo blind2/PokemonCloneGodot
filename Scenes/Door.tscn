@@ -8,7 +8,7 @@ extents = Vector2( 8.25435, 8.68057 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "open_door"
-length = 0.3
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
