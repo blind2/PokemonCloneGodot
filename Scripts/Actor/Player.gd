@@ -5,7 +5,7 @@ var state = WALK
 var current_direction
 var party = Party.new()
 var can_interact = true
-var battle_scene = preload("res://Scenes/BattleScene.tscn")
+var battle_scene = preload("res://Scenes/Screen/BattleScene.tscn")
 var is_battling = false
 
 onready var sprite = get_node("Sprite")
@@ -51,30 +51,23 @@ func dialog_range():
 		for body in interact_range.get_overlapping_bodies():
 			if body.has_method("interact"):
 				state = STOP
-				
 				body.interact()
 				body.refacing(self)
 				yield(dialog_box,"dialog_finished")
 				if body.status == body.STATUS.UNDEFEATED and is_battling == false:
 					body.can_talk = false
-					
-					Global.opponent_party = body.party
-					Global.opponent_sprite = body.battle_sprite
-					Global.player_party = self.party
-					
 					start_battle(body)
 				elif body.status == body.STATUS.DEFEATED:
 					state = WALK
 
 func start_battle(opponent):
 	is_battling = true
-	SceneChanger.change_scene(battle_scene)
-#	SceneChanger.battle_transition()
-#	yield(SceneChanger,"transition_finished")
-#	var new_battle_scene = battle_scene.instance()
-#	battle_scene.create_battle_scene(self, opponent)
-#	print("battle")
-#	game_ui.add_child(new_battle_scene)
+	SceneChanger.battle_transition()
+	yield(SceneChanger,"scene_changed")
+	var new_battle_scene = battle_scene.instance()
+	new_battle_scene.create_battle_scene(self, opponent)
+	game_ui.add_child(new_battle_scene)
+	
 
 func prevent_moving():
 	if state != STOP:

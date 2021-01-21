@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Background/start_screen_bg.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Start.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.345098, 0.627451, 0.345098, 1 )
+border_color = Color( 0, 0, 0, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 1 )
+
+[node name="StartScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.58667
+margin_top = 1.43201
+margin_right = 1.58667
+margin_bottom = 1.43201
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.58667
+margin_top = -1.43201
+margin_right = -1.58667
+margin_bottom = -1.43201
+mouse_filter = 2
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 318.413
+margin_top = 70.568
+margin_right = 728.413
+margin_bottom = 173.568
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "New Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentGame" type="Button" parent="."]
+margin_left = 318.413
+margin_top = 247.47
+margin_right = 728.413
+margin_bottom = 350.47
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Current Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="CurrentGame" to="." method="_on_CurrentGame_pressed"]

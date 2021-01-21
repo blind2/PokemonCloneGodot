@@ -75,9 +75,7 @@ func refacing(player):
 		set_trainer_frame(1)
 		change_direction.stop()
 
-"""
-Choisi une attaque au hasard dans la liste d'attaque du pokemon
-"""
+
 func choose_move():
 	 var max_number = party.get_pokemon().list_of_moves.size() - 1
 	 var rng = RandomNumberGenerator.new()
@@ -85,8 +83,6 @@ func choose_move():
 	 var random_number = rng.randi_range(0, max_number)
 	
 	 return  party.get_pokemon().list_of_moves[random_number]
-
-
 
 func set_trainer_frame(frame):
 	sprite.frame = frame

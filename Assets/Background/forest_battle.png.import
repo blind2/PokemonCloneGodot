@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Steelix.png-a00dc86e4112a4c4a8ac411a2d594982.stex"
+path="res://.import/forest_battle.png-d3ee9402f6c97ceb98aff87ff9984754.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pokemon/Steelix.png"
-dest_files=[ "res://.import/Steelix.png-a00dc86e4112a4c4a8ac411a2d594982.stex" ]
+source_file="res://Assets/Background/forest_battle.png"
+dest_files=[ "res://.import/forest_battle.png-d3ee9402f6c97ceb98aff87ff9984754.stex" ]
 
 [params]
 

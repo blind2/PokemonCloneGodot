@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Actor/Player.gd" type="Script" id=2]
 [ext_resource path="res://Resources/player_animation.tres" type="Animation" id=3]
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=1]
 resource_name = "move_down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -31,8 +31,7 @@ tracks/1/keys = {
 "values": [ 5, 4, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "move_up"
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -59,7 +58,7 @@ tracks/1/keys = {
 "values": [ 6, 7, 8, 7 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -74,7 +73,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5, 4 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.2
 step = 0.01
 tracks/0/type = "value"
@@ -90,7 +89,7 @@ tracks/0/keys = {
 "values": [ 9, 10, 11, 10 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -105,7 +104,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -120,7 +119,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 7 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -135,7 +134,7 @@ tracks/0/keys = {
 "values": [ 5, 4, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -150,7 +149,7 @@ tracks/0/keys = {
 "values": [ 9, 10, 11, 10 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -165,25 +164,25 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 7, 10 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 14.7099, 14.1653 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/move_down = SubResource( 11 )
-anims/move_up = SubResource( 1 )
-anims/run_down = SubResource( 2 )
-anims/run_left = SubResource( 3 )
-anims/run_right = SubResource( 4 )
-anims/run_up = SubResource( 5 )
-anims/walk_down = SubResource( 6 )
-anims/walk_left = SubResource( 7 )
-anims/walk_right = SubResource( 8 )
+anims/move_down = SubResource( 1 )
+anims/move_up = SubResource( 2 )
+anims/run_down = SubResource( 3 )
+anims/run_left = SubResource( 4 )
+anims/run_right = SubResource( 5 )
+anims/run_up = SubResource( 6 )
+anims/walk_down = SubResource( 7 )
+anims/walk_left = SubResource( 8 )
+anims/walk_right = SubResource( 9 )
 anims/walk_up = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -201,9 +200,9 @@ zoom = Vector2( 0.35, 0.35 )
 cast_to = Vector2( 8, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="InteractRange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
-shape = SubResource( 10 )
+shape = SubResource( 11 )

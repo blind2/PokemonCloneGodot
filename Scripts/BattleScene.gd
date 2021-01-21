@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 var player
 var opponent
@@ -19,6 +19,7 @@ onready var action_panel = get_node("Action")
 onready var tween = get_node("Tween")
 onready var delay = get_node("Delay")
 onready var battle_animation= get_node("BattleAnimation")
+onready var pokemon_menu = get_node("PokemonMenu")
 
 signal state_changed()
 
@@ -33,15 +34,15 @@ enum{
 	OPPONENT_DEATH,
 	OPPONENT_DEFEATED,
 	OPPONENT_SWITCH,
+	PLAYER_SWITCH,
 	GAIN_EXPERIENCE
 }
 
-#func create_battle_scene(player, opponent):
-#	self.player = player
-#	self.opponent = opponent
+func create_battle_scene(player, opponent):
+	self.player = player
+	self.opponent = opponent
 
 func _ready():
-	print(opponent)
 	update_battle()
 	#print(str(player_pokemon.get_amount_of_experience(opponent_pokemon)))
 
@@ -70,12 +71,22 @@ func update_battle():
 			opponent_defeated()
 		OPPONENT_SWITCH:
 			opponent_switch_pokemon()
+		PLAYER_SWITCH:
+			player_switch_pokemon()
 		GAIN_EXPERIENCE:
 			gain_experience()
 
+func get_move_data(index, node_name):
+	#Vérifie si le pokemon contient des attaques
+	if player_pokemon.get_move(index) != null:
+		moves_panel.get_node(node_name).text = player_pokemon.get_move(index).move_name
+	elif player_pokemon.get_move(index) == null:
+		moves_panel.get_node(node_name).text = "-----"
+		moves_panel.get_node(node_name).disabled = true
 
 func get_player_pokemon_data():
-	player_pokemon = Global.player_party.get_pokemon() #represente le premier pokemon de l'equipe de du joueur
+	player_pokemon = player.party.get_pokemon() #represente le premier pokemon de l'equipe de du joueur
+	pokemon_menu.player_party = player.party
 	
 	player_texture.texture = (load("res://Assets/Pokemon/Back/"+player_pokemon.back_sprite))
 	player_frame.get_node("HpBar").max_value = player_pokemon.hp
@@ -84,13 +95,14 @@ func get_player_pokemon_data():
 	player_frame.get_node("ExpBar").value = player_pokemon.experience
 	player_frame.get_node("Lvl").text = "lvl "+str(player_pokemon.level)
 	player_frame.get_node("Name").text = player_pokemon.pokemon_name
-	moves_panel.get_node("Move1").text = player_pokemon.get_move(0).move_name
-	moves_panel.get_node("Move2").text = player_pokemon.get_move(1).move_name
-	moves_panel.get_node("Move3").text = player_pokemon.get_move(2).move_name
-	moves_panel.get_node("Move4").text = player_pokemon.get_move(3).move_name
+	
+	get_move_data(0,"Move1")
+	get_move_data(1,"Move2")
+	get_move_data(2,"Move3")
+	get_move_data(3,"Move4")
 
 func get_opponent_pokemon_data():
-	opponent_pokemon = Global.opponent_party.get_pokemon() #represente le premier pokemon de l'equipe de l'adverssaire
+	opponent_pokemon = opponent.party.get_pokemon() #represente le premier pokemon de l'equipe de l'adverssaire
 	
 	opponent_texture.texture = (load("res://Assets/Pokemon/Front/"+opponent_pokemon.front_sprite))
 	opponent_frame.get_node("HpBar").max_value = opponent_pokemon.hp
@@ -101,7 +113,7 @@ func get_opponent_pokemon_data():
 func battle_intro():
 	get_player_pokemon_data()
 	get_opponent_pokemon_data()
-	opponent_texture.texture = Global.opponent_sprite
+	opponent_texture.texture = opponent.battle_sprite
 	battle_animation.play("start_fight")
 	dialog_box.set_combat_text(opponent.trainer_name+" would like to battle")
 	yield(get_tree().create_timer(2),"timeout")
@@ -214,6 +226,17 @@ func gain_experience():
 	else:
 		change_state(OPPONENT_SWITCH)
 
+func player_switch_pokemon():
+	battle_animation.play_backwards("player_switch_pokemon")
+	yield(battle_animation,"animation_finished")
+	battle_animation.play("player_switch_pokemon")
+	get_player_pokemon_data() #update pokemon data
+	dialog_box.set_combat_text("Go "+player_pokemon.pokemon_name+" !")
+	player_texture.texture = (load("res://Assets/Pokemon/Back/"+player_pokemon.back_sprite)) # update pokemon sprite
+	yield(battle_animation,"animation_finished")
+	change_state(OPPONENT_TURN)
+
+
 func opponent_switch_pokemon():
 	get_opponent_pokemon_data()
 	dialog_box.set_combat_text(opponent.trainer_name+" send out "+opponent_pokemon.pokemon_name)
@@ -235,7 +258,7 @@ func opponent_defeated():
 	opponent.status = opponent.STATUS.DEFEATED # change le status du joueur pour ne plus le re combattre
 	player.state = player.WALK #change l'etat du joueur pour marcher
 	player.is_battling = false 
-	queue_free()
+	SceneChanger.fade_out(self)
 
 func _bar_animation(bar, stat):
 	tween.interpolate_property(bar,"value", bar.value,stat,
@@ -265,4 +288,15 @@ func on_BattleScene_state_changed():
 	update_battle()
 
 func _on_Run_pressed():
-	queue_free()
+	SceneChanger.fade_out(self)
+
+func _on_Pokemon_pressed():
+	action_panel.hide()
+	moves_panel.hide()
+	pokemon_menu.show()
+
+func _on_PokemonMenu_switch_pokemon():
+	change_state(PLAYER_SWITCH)
+
+func _on_PokemonMenu_cancel():
+	change_state(SELECT_ACTION)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/CombatDialogBox.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Assets/Battle/combat_dialog_box.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Battle/combat_dialog_box_01.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 15
@@ -18,13 +18,14 @@ __meta__ = {
 }
 
 [node name="Text" type="RichTextLabel" parent="."]
-margin_left = 73.0975
-margin_top = 36.5125
-margin_right = 315.098
-margin_bottom = 62.5125
+margin_left = 52.0
+margin_top = 39.0
+margin_right = 301.0
+margin_bottom = 73.0
 rect_scale = Vector2( 3, 3 )
+mouse_filter = 1
 custom_fonts/normal_font = SubResource( 1 )
-custom_colors/default_color = Color( 0.258824, 0.239216, 0.239216, 1 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "this is a test string"
 text = "this is a test string"

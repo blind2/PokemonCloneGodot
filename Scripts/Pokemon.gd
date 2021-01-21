@@ -12,7 +12,7 @@ var special_defense
 var speed
 var front_sprite
 var back_sprite
-
+var menu_sprite
 var is_dead = false
 var current_hp
 
@@ -30,6 +30,7 @@ func _init(level, pokemon):
 	type = pokemon["type"]
 	front_sprite = pokemon["front_sprite"]
 	back_sprite = pokemon["back_sprite"]
+	menu_sprite = pokemon["menu_sprite"]
 	
 	#pokemon stats
 	hp = get_stat(pokemon["base_hp"], hp)

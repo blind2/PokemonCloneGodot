@@ -1,21 +1,22 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Assets/Background/red_battle.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Pokemon/Steelix.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Pokemon/Charizard.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/BattleScene.gd" type="Script" id=5]
-[ext_resource path="res://Assets/NPC/red_battle_sprite.png" type="Texture" id=6]
-[ext_resource path="res://Resources/battle_animation.tres" type="Animation" id=7]
-[ext_resource path="res://Scenes/CombatDialogBox.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/pokeball.png" type="Texture" id=9]
-[ext_resource path="res://Resources/dark_panel.tres" type="StyleBox" id=10]
-[ext_resource path="res://Resources/battle_button_normal.tres" type="StyleBox" id=11]
-[ext_resource path="res://Resources/battle_frame.tres" type="StyleBox" id=12]
-[ext_resource path="res://Resources/battle_button_hover.tres" type="StyleBox" id=13]
-[ext_resource path="res://Resources/fg_hp_bar.tres" type="StyleBox" id=14]
-[ext_resource path="res://Resources/bg_hp_bar.tres" type="StyleBox" id=15]
-[ext_resource path="res://Resources/fg_exp_bar.tres" type="StyleBox" id=16]
+[ext_resource path="res://Scenes/CombatDialogBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/pokeball.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Pokemon/Back/charizard_back.png" type="Texture" id=3]
+[ext_resource path="res://Assets/NPC/red_battle_sprite.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Background/grass_battle.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Pokemon/Front/steelix_front.png" type="Texture" id=6]
+[ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Resources/battle_animation.tres" type="Animation" id=8]
+[ext_resource path="res://Resources/fg_exp_bar.tres" type="StyleBox" id=9]
+[ext_resource path="res://Resources/battle_button_hover.tres" type="StyleBox" id=10]
+[ext_resource path="res://Resources/dark_panel.tres" type="StyleBox" id=11]
+[ext_resource path="res://Resources/battle_button_normal.tres" type="StyleBox" id=12]
+[ext_resource path="res://Resources/fg_hp_bar.tres" type="StyleBox" id=13]
+[ext_resource path="res://Resources/bg_hp_bar.tres" type="StyleBox" id=14]
+[ext_resource path="res://Resources/battle_frame.tres" type="StyleBox" id=15]
+[ext_resource path="res://Scripts/BattleScene.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/Screen/PokemonMenu.tscn" type="PackedScene" id=17]
 
 [sub_resource type="Theme" id=1]
 
@@ -155,7 +156,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 9 ), ExtResource( 9 ) ]
+"values": [ ExtResource( 2 ), ExtResource( 2 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("OpponentPokemon:rect_size")
@@ -217,7 +218,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 12.5533, 1 ),
 "update": 1,
-"values": [ ExtResource( 6 ), ExtResource( 6 ) ]
+"values": [ ExtResource( 4 ), ExtResource( 4 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("OpponentPokemon:stretch_mode")
@@ -267,7 +268,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 0.615572, 7.46427 ),
 "update": 1,
-"values": [ ExtResource( 4 ), ExtResource( 4 ) ]
+"values": [ ExtResource( 3 ), ExtResource( 3 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("PlayerPokemon:stretch_mode")
@@ -303,7 +304,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ), ExtResource( 3 ) ]
+"values": [ ExtResource( 6 ), ExtResource( 6 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("OpponentPokemon:stretch_mode")
@@ -320,44 +321,39 @@ tracks/5/keys = {
 
 [sub_resource type="DynamicFont" id=11]
 size = 30
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 30
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 30
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=14]
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=15]
 size = 30
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=16]
 size = 30
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=17]
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=18]
-font_data = ExtResource( 1 )
+font_data = ExtResource( 7 )
 
-[node name="BattleScene" type="Panel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -300.0
-margin_right = 512.0
-margin_bottom = 300.0
+[node name="BattleScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 theme = SubResource( 1 )
-script = ExtResource( 5 )
+script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -371,17 +367,8 @@ margin_left = -512.0
 margin_top = -300.0
 margin_right = 512.0
 margin_bottom = 110.0
-texture = ExtResource( 2 )
+texture = ExtResource( 5 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="."]
-margin_top = 410.0
-margin_right = 1024.0
-margin_bottom = 600.0
-custom_styles/panel = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -392,7 +379,7 @@ margin_top = 219.0
 margin_right = 222.0
 margin_bottom = 283.0
 rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 6 )
+texture = ExtResource( 4 )
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
@@ -411,16 +398,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CombatDialogBox" parent="." instance=ExtResource( 8 )]
-margin_left = 15.0
+[node name="CombatDialogBox" parent="." instance=ExtResource( 1 )]
 margin_top = 410.0
-margin_right = -13.0
 margin_bottom = 600.0
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="BattleAnimation" type="AnimationPlayer" parent="."]
-anims/opponent_damage_taken = ExtResource( 7 )
+anims/opponent_damage_taken = ExtResource( 8 )
 anims/opponent_dead = SubResource( 2 )
 anims/opponent_switch = SubResource( 3 )
 anims/opponent_switch_pokemon = SubResource( 4 )
@@ -438,7 +423,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -190.0
 margin_bottom = 6.10352e-05
-custom_styles/panel = ExtResource( 10 )
+custom_styles/panel = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -448,8 +433,8 @@ margin_left = 192.0
 margin_top = 14.0
 margin_right = 452.0
 margin_bottom = 79.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 11 )
 text = "Attaque 1"
 __meta__ = {
@@ -461,8 +446,8 @@ margin_left = 568.0
 margin_top = 14.0
 margin_right = 828.0
 margin_bottom = 79.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 12 )
 text = "Attaque 2"
 __meta__ = {
@@ -474,8 +459,8 @@ margin_left = 192.0
 margin_top = 106.0
 margin_right = 452.0
 margin_bottom = 171.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 11 )
 text = "Attaque 3"
 __meta__ = {
@@ -487,8 +472,8 @@ margin_left = 568.0
 margin_top = 106.0
 margin_right = 828.0
 margin_bottom = 171.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 12 )
 text = "Attaque 4"
 __meta__ = {
@@ -497,10 +482,10 @@ __meta__ = {
 
 [node name="Action" type="Panel" parent="."]
 visible = false
-margin_top = 410.0
+margin_top = 411.0
 margin_right = 1024.0
-margin_bottom = 600.0
-custom_styles/panel = ExtResource( 10 )
+margin_bottom = 601.0
+custom_styles/panel = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -510,9 +495,10 @@ margin_left = 192.0
 margin_top = 14.0
 margin_right = 452.0
 margin_bottom = 78.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 13 )
+action_mode = 0
 text = "Fight"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -523,8 +509,8 @@ margin_left = 568.0
 margin_top = 14.0
 margin_right = 828.0
 margin_bottom = 78.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 13 )
 text = "Pokemon"
 __meta__ = {
@@ -536,8 +522,8 @@ margin_left = 192.0
 margin_top = 106.0
 margin_right = 452.0
 margin_bottom = 170.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 13 )
 text = "Bag"
 __meta__ = {
@@ -549,8 +535,8 @@ margin_left = 568.0
 margin_top = 106.0
 margin_right = 828.0
 margin_bottom = 170.0
-custom_styles/hover = ExtResource( 13 )
-custom_styles/normal = ExtResource( 11 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 12 )
 custom_fonts/font = SubResource( 13 )
 text = "Run"
 __meta__ = {
@@ -563,7 +549,7 @@ margin_left = 56.0
 margin_top = 32.0
 margin_right = 360.0
 margin_bottom = 112.0
-custom_styles/panel = ExtResource( 12 )
+custom_styles/panel = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -573,8 +559,8 @@ margin_left = 2.0
 margin_top = 32.0
 margin_right = 300.0
 margin_bottom = 56.0
-custom_styles/fg = ExtResource( 14 )
-custom_styles/bg = ExtResource( 15 )
+custom_styles/fg = ExtResource( 13 )
+custom_styles/bg = ExtResource( 14 )
 custom_fonts/font = SubResource( 14 )
 value = 100.0
 rounded = true
@@ -611,7 +597,7 @@ margin_left = 672.0
 margin_top = 294.418
 margin_right = 976.0
 margin_bottom = 395.418
-custom_styles/panel = ExtResource( 12 )
+custom_styles/panel = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -621,8 +607,8 @@ margin_left = 3.0
 margin_top = 32.0
 margin_right = 300.0
 margin_bottom = 56.0
-custom_styles/fg = ExtResource( 14 )
-custom_styles/bg = ExtResource( 15 )
+custom_styles/fg = ExtResource( 13 )
+custom_styles/bg = ExtResource( 14 )
 custom_fonts/font = SubResource( 17 )
 value = 100.0
 rounded = true
@@ -636,8 +622,8 @@ margin_left = 3.0
 margin_top = 64.0
 margin_right = 300.0
 margin_bottom = 88.0
-custom_styles/fg = ExtResource( 16 )
-custom_styles/bg = ExtResource( 15 )
+custom_styles/fg = ExtResource( 9 )
+custom_styles/bg = ExtResource( 14 )
 custom_fonts/font = SubResource( 18 )
 rounded = true
 percent_visible = false
@@ -663,11 +649,16 @@ custom_fonts/font = SubResource( 16 )
 text = "Lvl 55"
 align = 1
 valign = 1
+
+[node name="PokemonMenu" parent="." instance=ExtResource( 17 )]
+visible = false
 [connection signal="state_changed" from="." to="." method="on_BattleScene_state_changed"]
-[connection signal="mouse_entered" from="Moves/Move1" to="." method="_on_Move1_mouse_entered"]
 [connection signal="pressed" from="Moves/Move1" to="." method="_on_Move1_pressed"]
 [connection signal="pressed" from="Moves/Move2" to="." method="_on_Move2_pressed"]
 [connection signal="pressed" from="Moves/Move3" to="." method="_on_Move3_pressed"]
 [connection signal="pressed" from="Moves/Move4" to="." method="_on_Move4_pressed"]
 [connection signal="pressed" from="Action/Fight" to="." method="_on_Fight_pressed"]
+[connection signal="pressed" from="Action/Pokemon" to="." method="_on_Pokemon_pressed"]
 [connection signal="pressed" from="Action/Run" to="." method="_on_Run_pressed"]
+[connection signal="cancel" from="PokemonMenu" to="." method="_on_PokemonMenu_cancel"]
+[connection signal="switch_pokemon" from="PokemonMenu" to="." method="_on_PokemonMenu_switch_pokemon"]

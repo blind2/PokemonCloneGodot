@@ -1,0 +1,753 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Assets/Background/pokemon_menu.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Battle/MenuPokemon/menu_cancel_normal.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Battle/MenuPokemon/menu_cancel_pressed.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Pokemon/Menu/venusaur_menu.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Screen/PokemonMenu.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Battle/MenuPokemon/current_pokemon_pressed.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Battle/MenuPokemon/current_pokemon_normal.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Battle/MenuPokemon/other_pokemon_pressed.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Battle/MenuPokemon/other_pokemon_normal.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Battle/MenuPokemon/black_color.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Battle/MenuPokemon/green_color.png" type="Texture" id=11]
+[ext_resource path="res://Assets/menu.png" type="Texture" id=12]
+[ext_resource path="res://Fonts/pokemon_fire_red.ttf" type="DynamicFontData" id=13]
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_size = 2
+outline_color = Color( 0.376471, 0.368627, 0.368627, 1 )
+font_data = ExtResource( 13 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "moving_pokemon"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Party1/PokemonSprite:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 31, 26 ), Vector2( 31, 22 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Party2/PokemonSprite:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -13 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Party3/PokemonSprite:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -13 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Party4/PokemonSprite:rect_position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -13 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Party5/PokemonSprite:rect_position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -13 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Party6/PokemonSprite:rect_position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, -13 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 13 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[node name="PokemonMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Party1" type="TextureButton" parent="."]
+margin_left = 9.77218
+margin_top = 61.3755
+margin_right = 367.772
+margin_bottom = 282.376
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonSprite" type="TextureRect" parent="Party1"]
+margin_left = 31.0
+margin_top = 26.0
+margin_right = 111.0
+margin_bottom = 106.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Party1"]
+margin_left = 127.0
+margin_top = 160.0
+margin_right = 333.0
+margin_bottom = 172.0
+value = 50.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentHP" type="Label" parent="Party1"]
+margin_left = 198.756
+margin_top = 179.043
+margin_right = 243.756
+margin_bottom = 214.043
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TotalHP" type="Label" parent="Party1"]
+margin_left = 277.756
+margin_top = 179.043
+margin_right = 310.756
+margin_bottom = 206.043
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonName" type="Label" parent="Party1"]
+margin_left = 152.129
+margin_top = 67.1525
+margin_right = 266.129
+margin_bottom = 102.152
+custom_fonts/font = SubResource( 2 )
+text = "Venusaur"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Party1"]
+margin_left = 206.0
+margin_top = 113.017
+margin_right = 251.0
+margin_bottom = 148.017
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Party2" type="TextureButton" parent="."]
+margin_left = 407.0
+margin_top = 37.0
+margin_right = 1018.0
+margin_bottom = 120.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonSprite" type="TextureRect" parent="Party2"]
+margin_top = -8.0
+margin_right = 80.0
+margin_bottom = 72.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Party2"]
+margin_left = 391.0
+margin_top = 30.0
+margin_right = 587.0
+margin_bottom = 42.0
+value = 50.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentHP" type="Label" parent="Party2"]
+margin_left = 456.378
+margin_top = 50.3801
+margin_right = 501.378
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TotalHP" type="Label" parent="Party2"]
+margin_left = 539.4
+margin_top = 50.3801
+margin_right = 584.4
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonName" type="Label" parent="Party2"]
+margin_left = 148.153
+margin_top = 5.36444
+margin_right = 262.153
+margin_bottom = 40.3644
+custom_fonts/font = SubResource( 2 )
+text = "Venusaur"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Party2"]
+margin_left = 208.718
+margin_top = 50.3801
+margin_right = 253.718
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Party3" type="TextureButton" parent="."]
+margin_left = 407.0
+margin_top = 128.528
+margin_right = 1018.0
+margin_bottom = 211.528
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonSprite" type="TextureRect" parent="Party3"]
+margin_top = -8.0
+margin_right = 80.0
+margin_bottom = 72.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Party3"]
+margin_left = 391.0
+margin_top = 30.0
+margin_right = 587.0
+margin_bottom = 42.0
+value = 50.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentHP" type="Label" parent="Party3"]
+margin_left = 456.378
+margin_top = 50.3801
+margin_right = 501.378
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TotalHP" type="Label" parent="Party3"]
+margin_left = 539.4
+margin_top = 50.3801
+margin_right = 584.4
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonName" type="Label" parent="Party3"]
+margin_left = 148.153
+margin_top = 5.36444
+margin_right = 262.153
+margin_bottom = 40.3644
+custom_fonts/font = SubResource( 2 )
+text = "Venusaur"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Party3"]
+margin_left = 208.718
+margin_top = 50.3801
+margin_right = 253.718
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Party4" type="TextureButton" parent="."]
+margin_left = 407.0
+margin_top = 221.376
+margin_right = 1018.0
+margin_bottom = 304.375
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonSprite" type="TextureRect" parent="Party4"]
+margin_top = -8.0
+margin_right = 80.0
+margin_bottom = 72.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Party4"]
+margin_left = 391.0
+margin_top = 30.0
+margin_right = 587.0
+margin_bottom = 42.0
+value = 50.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentHP" type="Label" parent="Party4"]
+margin_left = 456.378
+margin_top = 50.3801
+margin_right = 501.378
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TotalHP" type="Label" parent="Party4"]
+margin_left = 539.4
+margin_top = 50.3801
+margin_right = 584.4
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonName" type="Label" parent="Party4"]
+margin_left = 148.153
+margin_top = 5.36444
+margin_right = 262.153
+margin_bottom = 40.3644
+custom_fonts/font = SubResource( 2 )
+text = "Venusaur"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Party4"]
+margin_left = 208.718
+margin_top = 50.3801
+margin_right = 253.718
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Party5" type="TextureButton" parent="."]
+margin_left = 407.0
+margin_top = 306.756
+margin_right = 1018.0
+margin_bottom = 389.756
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonSprite" type="TextureRect" parent="Party5"]
+margin_top = -8.0
+margin_right = 80.0
+margin_bottom = 72.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Party5"]
+margin_left = 391.0
+margin_top = 30.0
+margin_right = 587.0
+margin_bottom = 42.0
+value = 50.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentHP" type="Label" parent="Party5"]
+margin_left = 456.378
+margin_top = 50.3801
+margin_right = 501.378
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TotalHP" type="Label" parent="Party5"]
+margin_left = 539.4
+margin_top = 50.3801
+margin_right = 584.4
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonName" type="Label" parent="Party5"]
+margin_left = 148.153
+margin_top = 5.36444
+margin_right = 262.153
+margin_bottom = 40.3644
+custom_fonts/font = SubResource( 2 )
+text = "Venusaur"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Party5"]
+margin_left = 208.718
+margin_top = 50.3801
+margin_right = 253.718
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Party6" type="TextureButton" parent="."]
+margin_left = 407.0
+margin_top = 397.5
+margin_right = 1018.0
+margin_bottom = 480.5
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonSprite" type="TextureRect" parent="Party6"]
+margin_top = -8.0
+margin_right = 80.0
+margin_bottom = 72.0
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Party6"]
+margin_left = 391.0
+margin_top = 30.0
+margin_right = 587.0
+margin_bottom = 42.0
+value = 50.0
+texture_under = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentHP" type="Label" parent="Party6"]
+margin_left = 456.378
+margin_top = 50.3801
+margin_right = 501.378
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TotalHP" type="Label" parent="Party6"]
+margin_left = 539.4
+margin_top = 50.3801
+margin_right = 584.4
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PokemonName" type="Label" parent="Party6"]
+margin_left = 148.153
+margin_top = 5.36444
+margin_right = 262.153
+margin_bottom = 40.3644
+custom_fonts/font = SubResource( 2 )
+text = "Venusaur"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Party6"]
+margin_left = 208.718
+margin_top = 50.3801
+margin_right = 253.718
+margin_bottom = 85.3801
+custom_fonts/font = SubResource( 2 )
+text = "500"
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="TextureButton" parent="."]
+margin_left = 794.0
+margin_top = 503.0
+margin_right = 1018.0
+margin_bottom = 572.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/moving_pokemon = SubResource( 1 )
+
+[node name="OptionMenu" type="NinePatchRect" parent="."]
+visible = false
+margin_left = 778.0
+margin_top = 348.0
+margin_right = 858.0
+margin_bottom = 430.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 12 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Summary" type="Button" parent="OptionMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 72.0
+margin_bottom = 27.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.490196, 0.490196, 0.490196, 1 )
+custom_colors/font_color_pressed = Color( 0.490196, 0.490196, 0.490196, 1 )
+text = "Summary"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Switch" type="Button" parent="OptionMenu"]
+margin_left = 7.0
+margin_top = 27.0
+margin_right = 72.0
+margin_bottom = 47.0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color_disabled = Color( 0.772549, 0.0862745, 0.0862745, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.490196, 0.490196, 0.490196, 1 )
+custom_colors/font_color_pressed = Color( 0.490196, 0.490196, 0.490196, 1 )
+text = "Switch"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="OptionMenu"]
+margin_left = 7.0
+margin_top = 47.0
+margin_right = 72.0
+margin_bottom = 67.0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.490196, 0.490196, 0.490196, 1 )
+custom_colors/font_color_pressed = Color( 0.490196, 0.490196, 0.490196, 1 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Party1" to="." method="_on_Party1_pressed"]
+[connection signal="pressed" from="Party2" to="." method="_on_Party2_pressed"]
+[connection signal="pressed" from="Party3" to="." method="_on_Party3_pressed"]
+[connection signal="pressed" from="Party4" to="." method="_on_Party4_pressed"]
+[connection signal="pressed" from="Party5" to="." method="_on_Party5_pressed"]
+[connection signal="pressed" from="Party6" to="." method="_on_Party6_pressed"]
+[connection signal="pressed" from="Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="OptionMenu/Switch" to="." method="_on_Switch_pressed"]
+[connection signal="pressed" from="OptionMenu/Cancel" to="." method="_on_OptionMenuCancel_pressed"]

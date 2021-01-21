@@ -7,7 +7,6 @@ var dialog_encounter = true
 
 onready var text= get_node("Text")
 onready var delay = get_node("Delay")
-onready var player = get_node("/root/World/Player")
 
 signal dialog_finished()
 signal next_line()
